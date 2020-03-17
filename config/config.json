@@ -1,16 +1,25 @@
 {
   "development": {
+<<<<<<< HEAD
     "username": "",
     "password": "",
     "database": "exampledb",
     "host": "localhost",
     "dialect": "mysql",
      "port": ""
+=======
+    "username": "root",
+    "password": "home4567",
+    "database": "abot_db",
+    "host": "localhost",
+    "port": "3306",
+    "dialect": "mysql"
+>>>>>>> 40091bacc3cab4b86c89fad4e002456359a94ed6
   },
   "test": {
     "username": "root",
-    "password": null,
-    "database": "testdb",
+    "password": "home4567",
+    "database": "abot_db",
     "host": "localhost",
     "dialect": "mysql",
     "logging": false
