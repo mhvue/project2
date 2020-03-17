@@ -26,11 +26,6 @@ module.exports = function(sequelize, DataTypes) {
         endTime: {
             type: DataTypes.INTEGER,
             allowNull: false
-        },
-        approved: {
-            type: DataTypes.BOOLEAN,
-            defaultValue: false,
-            allowNull: false
         }
     });
     return Schedule;
