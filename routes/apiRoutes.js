@@ -38,18 +38,13 @@ module.exports = function (app) {
   app.delete("/api/requestOff/:id", function(req, res) {
     db.Schedule.destroy({ where: { id: req.params.id } }).then(function(dbSchedule) {
       res.json(dbSchedule);
-    });
-  });
-};
+    })})}
+//STARTING WRITE CODE HERE: 
 
-// Edit a request off by id
-  app.put("/api/requestOff:id", function(req, res) {
-    db.Schedule.update(req.body,
-      {
-        where: {
-          id: req.params.id
-        }
-      }).then(function(req, res){
-        res.json(dbSchedule);
-      });
-  });
+//requiring the authController.js
+// var authController = require("./authController.js");
+
+///this is our GET to the sign up page w/ authControlLer
+// module.exports = function (app){
+//     app.get("/signup", authController.signup);
+// }
