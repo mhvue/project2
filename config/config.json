@@ -1,20 +1,11 @@
 {
   "development": {
-<<<<<<< HEAD
-    "username": "",
+    "username": "root",
     "password": "",
-    "database": "exampledb",
+    "database": "",
     "host": "localhost",
     "dialect": "mysql",
      "port": ""
-=======
-    "username": "root",
-    "password": "home4567",
-    "database": "abot_db",
-    "host": "localhost",
-    "port": "3306",
-    "dialect": "mysql"
->>>>>>> 40091bacc3cab4b86c89fad4e002456359a94ed6
   },
   "test": {
     "username": "root",
@@ -25,7 +16,10 @@
     "logging": false
   },
   "production": {
-    "use_env_variable": "JAWSDB_URL",
+    "username": "root",
+    "password": null,
+    "database": "database_production",
+    "host": "127.0.0.1",
     "dialect": "mysql"
   }
 }
