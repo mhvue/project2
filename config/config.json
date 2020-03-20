@@ -1,11 +1,11 @@
 {
   "development": {
-    "username": "",
-    "password": "",
-    "database": "exampledb",
+    "username": "root",
+    "password": "home4567",
+    "database": "abot_db",
     "host": "localhost",
     "dialect": "mysql",
-     "port": ""
+     "port": "3306"
   },
   "test": {
     "username": "root",

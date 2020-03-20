@@ -20,11 +20,11 @@
         <form name="requestOff">
             <div class="form-group">
                 <label for="exampleFormControlInput1">First Name (required)</label>
-                <input name="firstname" class="form-control" id= "name exampleFormControlInput1" placeholder="First Name">
+                <input name="firstName" class="form-control" id= "firstName exampleFormControlInput1" placeholder="First Name">
             </div>
             <div class="form-group">
                 <label for="exampleFormControlInput1">Last Name (required)</label>
-                <input name="lastname" class="form-control" id= "name exampleFormControlInput1" placeholder="Last Name">
+                <input name="lastName" class="form-control" id= "lastName exampleFormControlInput1" placeholder="Last Name">
             </div>
             <div class="form-group">
                 <label for="Date">Please choose a date from the options below. If the date you need is not an option, please reach out to your manager directly.</label>
@@ -67,19 +67,42 @@
 <script type="text/javascript">
 
 function validateForm() {
-  var x = document.forms["requestOff"]["firstname"].value;
-  var y = document.forms["requestOff"]["lastname"].value;
+  var x = document.forms["requestOff"]["firstName"].value;
+  var y = document.forms["requestOff"]["lastName"].value;
   if (x == "" || y == "") {
     alert("Please fill out required name field.");
     return false;
   }
 };
 
-$("#submitRequest").click(function(){
-return validateForm();
-});
+$("#submitRequest").click(function(event){
+    event.preventDefault();
+    
+    var newRequest = {
+        firstname: $("#firstName").val().trim(),
+        lastname: $("#lastName").val().trim(),
+        date:$("#date").val().trim(),
+        startTime: $("#startTime").val().trim(),
+        endTime: $("#endTime").val().trim()
+    };
+    validateForm();
+    
+    console.log(newRequest);
 
 
+    $.post("/api/requestOff", newRequest,
+      function(data) {
+
+
+        $("#firstName").val("");
+        $("#lastName").val("");
+        $("#date").val("");
+        $("#startTime").val("");
+        $("#endTime").val("");
+
+      });
+
+  });
 
 
 
