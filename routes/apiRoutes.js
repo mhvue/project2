@@ -39,12 +39,4 @@ module.exports = function (app) {
     db.Schedule.destroy({ where: { id: req.params.id } }).then(function(dbSchedule) {
       res.json(dbSchedule);
     })})}
-//STARTING WRITE CODE HERE: 
 
-//requiring the authController.js
-// var authController = require("./authController.js");
-
-///this is our GET to the sign up page w/ authControlLer
-// module.exports = function (app){
-//     app.get("/signup", authController.signup);
-// }
