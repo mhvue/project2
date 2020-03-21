@@ -2,34 +2,30 @@
 
 //requiring the authController.js
 
-// var authController = require("./authController.js");
+var authController = require("./authController.js");
 
-///this is our GET to the sign up page w/ authControlLer
-// module.exports = function (app){
-//     app.get("/signup", authController.signup);
-// }
+// this is our GET to the sign up page w/ authControlLer
+module.exports = function (app){
+    app.get("/signup", authController.signup);
 
 // Full expected result of this page as laid out in documentation below:
 
-// var authController = require('../controllers/authcontroller.js');
+// module.exports = function(app, passport) { //we do not have passport yet! 
+
+    // app.get('/signin', authController.signin);
+    app.get("/index", authController.signin);
  
+    app.post("/signup", passport.authenticate("local", {
+        failureRedirect: "/signup"}),function(req,res){
+            res.redirect("/dashboard")
+        }
+
+        //     successRedirect: '/dashboard',
  
-// module.exports = function(app, passport) {
+        //     failureRedirect: '/signup'
+        // }
  
- 
-//     app.get('/signup', authController.signup);
- 
- 
-//     app.get('/signin', authController.signin);
- 
- 
-//     app.post('/signup', passport.authenticate('local-signup', {
-//             successRedirect: '/dashboard',
- 
-//             failureRedirect: '/signup'
-//         }
- 
-//     ));
+    );
  
  
 //     app.get('/dashboard', isLoggedIn, authController.dashboard);
@@ -58,4 +54,4 @@
  
 //     }
  
-// }
+}

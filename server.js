@@ -1,6 +1,5 @@
 require("dotenv").config();
 var express = require("express");
-var exphbs = require("express-handlebars");
 
 var db = require("./models");
 
@@ -21,24 +20,18 @@ app.use(session({secret: "keyboard cat",resave: true, saveUninitialized:true}));
 app.use(passport.initialize());
 app.use(passport.session());
 
-// Handlebars
-app.engine(
-  "handlebars",
-  exphbs({
-    defaultLayout: "main"
-  })
-);
-app.set("view engine", "handlebars");
+
+app.set("views", "./views");
 
 // Routes
 require("./routes/apiRoutes")(app);
 require("./routes/htmlRoutes")(app);
 
 //Trying set route for authController 
-// require("./routes/authController")(app);
+require("./routes/authController");
 // console.log(require("./routes/authController"));
 
-
+require("./config/passport/passport")(passport, db.user);
 var syncOptions = { force: false };
 
 // If running a test, set syncOptions.force to true
