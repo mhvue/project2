@@ -10,7 +10,7 @@ var session = require("express-session");
 var bodyParser = require("body-parser");
 
 
-var PORT = process.env.PORT || 3000;
+var PORT = process.env.PORT || 8080;
 
 // Middleware
 app.use(express.urlencoded({ extended: false }));
