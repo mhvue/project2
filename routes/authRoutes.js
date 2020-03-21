@@ -2,12 +2,12 @@
 
 //requiring the authController.js
 
-// var authController = require("./authController.js");
+var authController = require("./authController.js");
 
 ///this is our GET to the sign up page w/ authControlLer
-// module.exports = function (app){
-//     app.get("/signup", authController.signup);
-// }
+module.exports = function (app){
+    app.get("/signup", authController.signup);
+}
 
 // Full expected result of this page as laid out in documentation below:
 

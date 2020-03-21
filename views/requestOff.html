@@ -37,30 +37,30 @@
 
         <form name="requestOff">
             <div class="form-group">
-                <label for="exampleFormControlInput1">First Name (required)</label>
-                <input name="firstName" class="form-control" id="firstName exampleFormControlInput1"
+                <label for="firstName">First Name (required)</label>
+                <input name="firstName" class="required form-control" id="firstName"
                     placeholder="First Name">
             </div>
             <div class="form-group">
-                <label for="exampleFormControlInput1">Last Name (required)</label>
-                <input name="lastName" class="form-control" id="lastName exampleFormControlInput1"
+                <label for="lastName">Last Name (required)</label>
+                <input name="lastName" class="required form-control" id="lastName"
                     placeholder="Last Name">
             </div>
             <div class="form-group">
-                <label for="Date">Please choose a date from the options below. If the date you need is not an option,
+                <label for="date">Please choose a date from the options below. If the date you need is not an option,
                     please reach out to your manager directly.</label>
-                <select class="form-control" id="date exampleFormControlSelect1">
-                    <option></option>
-                    <option></option>
-                    <option></option>
-                    <option></option>
-                    <option></option>
+                <select class="form-control" id="date" name="startTime">
+                    <option>04/01/2020</option>
+                    <option>04/02/2020</option>
+                    <option>04/03/2020</option>
+                    <option>04/04/2020</option>
+                    <option>04/05/2020</option>
                 </select>
             </div>
 
             <div class="form-group">
-                <label for="Start Time">Shift Start Time</label>
-                <select class="form-control" id="startTime exampleFormControlSelect1">
+                <label for="startTime">Shift Start Time</label>
+                <select class="form-control" id="startTime" name="startTime">
                     <option>8:00am</option>
                     <option>9:00am</option>
                     <option>12:00pm</option>
@@ -69,8 +69,8 @@
             </div>
 
             <div class="form-group">
-                <label for="End Time">Shift End Time</label>
-                <select class="form-control" id="endTime exampleFormControlSelect1">
+                <label for="endTime">Shift End Time</label>
+                <select class="form-control" id="endTime" name="endTime">
                     <option>12:00pm</option>
                     <option>3:00pm</option>
                     <option>6:00pm</option>
@@ -86,14 +86,14 @@
 </body>
 
 <script type="text/javascript">
-
     function validateForm() {
         var x = document.forms["requestOff"]["firstName"].value;
         var y = document.forms["requestOff"]["lastName"].value;
         if (x == "" || y == "") {
-            alert("Please fill out required name field.");
+            $( ".required" ).after( "Please fill out required name field." );
+            // alert("Please fill out required name field.");
             return false;
-        }
+        } return true;
     };
 
     $("#submitRequest").click(function (event) {
@@ -106,22 +106,31 @@
             startTime: $("#startTime").val().trim(),
             endTime: $("#endTime").val().trim()
         };
-        validateForm();
+        if(validateForm()) {
 
-        console.log(newRequest);
-
-
-        $.post("/api/requestOff", newRequest,
+            
+            console.log(newRequest);
+            
+            
+            $.post("/api/requestoff", newRequest,
             function (data) {
 
+                if(data){
+                    alert("Request Submitted!")
 
-                $("#firstName").val("");
-                $("#lastName").val("");
-                $("#date").val("");
-                $("#startTime").val("");
-                $("#endTime").val("");
-
+                    $("#firstName").val("");
+                    $("#lastName").val("");
+                    $("#date").val("");
+                    $("#startTime").val("");
+                    $("#endTime").val("");
+                } else {
+                    alert("try again")
+                }
+                
+                
+                
             });
+        };
 
     });
 

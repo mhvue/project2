@@ -9,16 +9,18 @@ module.exports = function (app) {
     });
 
     // Create a request off 
-    app.post("/api/requestOff", function (req, res) { //this is to be able to add the request off
-        db.PTO.create({
-            firstName: req.body.firstName,
-            lastName: req.body.lastName,
-            date: req.body.date,
-            startTime: req.body.startTime,
-            endTime: req.body.endTime,
-            approved: req.body.approved
-        }).then(function (dbPTO) {
-            res.json(dbPTO);
+    app.post("/api/requestoff", function (req, res) { //this is to be able to add the request off
+        var newRequest = req.body;
+        console.log(newRequest);
+        db.pto.create({
+            firstName: newRequest.firstname,
+            lastName: newRequest.lastname,
+            date: newRequest.date,
+            startTime: newRequest.startTime,
+            endTime: newRequest.endTime,
+            approved: newRequest.approved
+        }).then(function (dbpto) {
+            res.json(dbpto);
         });
     });
 
@@ -35,7 +37,7 @@ module.exports = function (app) {
     });
 
 //   // Delete a request off by id 
-  app.delete("/api/requestOff/:id", function(req, res) {
+  app.delete("/api/requestoff/:id", function(req, res) {
     db.Schedule.destroy({ where: { id: req.params.id } }).then(function(dbSchedule) {
       res.json(dbSchedule);
     })})}
