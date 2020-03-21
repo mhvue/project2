@@ -1,12 +1,12 @@
 //STARTING WRITE CODE HERE: 
 
 //requiring the authController.js
-
+var passport = require("passport");
 var authController = require("./authController.js");
 
 // this is our GET to the sign up page w/ authControlLer
 module.exports = function (app){
-    app.get("/signup", authController.signup);
+    app.get("/auth/signup", authController.signup);
 
 // Full expected result of this page as laid out in documentation below:
 
@@ -15,9 +15,10 @@ module.exports = function (app){
     // app.get('/signin', authController.signin);
     app.get("/index", authController.signin);
  
-    app.post("/signup", passport.authenticate("local", {
+    app.post("/auth/signup", passport.authenticate("local", {
         failureRedirect: "/signup"}),function(req,res){
             res.redirect("/dashboard")
+            
         }
 
         //     successRedirect: '/dashboard',

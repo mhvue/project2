@@ -10,11 +10,10 @@ module.exports = function(app) {
 
   app.get("/signup", function(req, res) {
     res.sendFile(path.join(__dirname, "../views/signup.html"));
-   
    });
 
   //LOGIN  PAGE W/ HOME OR INDEX 
-  app.get("/login", function(req, res) {
+  app.get("/login", function(req, res) { //was index here
    res.sendFile(path.join(__dirname, "../views/index.html"));
   
   });

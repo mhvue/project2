@@ -28,7 +28,7 @@ require("./routes/apiRoutes")(app);
 require("./routes/htmlRoutes")(app);
 
 //Trying set route for authController 
-require("./routes/authController");
+require("./routes/authRoutes")(app);
 // console.log(require("./routes/authController"));
 
 require("./config/passport/passport")(passport, db.user);
