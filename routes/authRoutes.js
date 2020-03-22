@@ -12,47 +12,39 @@ module.exports = function (app){
 
 // module.exports = function(app, passport) { //we do not have passport yet! 
 
-    // app.get('/signin', authController.signin);
-    app.get("/index", authController.signin);
+    app.get("/auth/signin", authController.signin);
  
     app.post("/auth/signup", passport.authenticate("local", {
         failureRedirect: "/signup"}),function(req,res){
-            res.redirect("/dashboard")
+            res.redirect("/loggedin")
             
         }
-
-        //     successRedirect: '/dashboard',
- 
-        //     failureRedirect: '/signup'
-        // }
- 
     );
  
  
-//     app.get('/dashboard', isLoggedIn, authController.dashboard);
+    app.get('/', isLoggedIn, authController.index);
  
  
  
-//     app.get('/logout', authController.logout);
+    app.get('/auth/logout', authController.logout);
  
  
-//     app.post('/signin', passport.authenticate('local-signin', {
-//             successRedirect: '/dashboard',
+    app.post('/auth/signin', passport.authenticate('local', {
+            successRedirect: "/",
+            failureRedirect: "/signin"
+        }
  
-//             failureRedirect: '/signin'
-//         }
- 
-//     ));
+    ));
  
  
-//     function isLoggedIn(req, res, next) {
+    function isLoggedIn(req, res, next) {
  
-//         if (req.isAuthenticated())
+        if (req.isAuthenticated())
  
-//             return next();
+            return next();
  
-//         res.redirect('/signin');
+        res.redirect('/signin');
  
-//     }
+    }
  
 }

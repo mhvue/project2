@@ -9,23 +9,22 @@ module.exports = {
         console.log("hello")
     },
 
+
     signin: function(req, res) {
-        res.render("index");
+        res.render("/");
         console.log("hellooo")
     },
 
-    dashboard: function(req, res) {
-        res.render("dashboard");
-        console.log("hello")
+    index: function(req, res) {
+        res.render("/loggedin");
+
     },
 
-    // logout: function(req, res) {
-
-    //     req.session.destroy(function(err) {
+    logout: function(req, res) {
+        req.session.destroy(function(err) {
+            res.redirect('/');
         
-    //         res.redirect('/');
+        });
         
-    //     });
-        
-    // }
+    }
 };
