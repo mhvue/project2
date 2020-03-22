@@ -1,15 +1,8 @@
-//STARTING WRITE CODE HERE: 
-
 var passport = require("passport");
 var authController = require("./authController.js");
 
-// this is our GET to the sign up page w/ authControlLer
 module.exports = function (app){
     app.get("/auth/signup", authController.signup);
-
-// Full expected result of this page as laid out in documentation below:
-
-// module.exports = function(app, passport) { //we do not have passport yet! 
 
     app.get("/auth/signin", authController.signin);
  
@@ -25,7 +18,7 @@ module.exports = function (app){
     app.get("/auth/logout", authController.logout);
  
     app.post("/auth/signin", passport.authenticate("local", {
-        failureRedirect: "/signin"}), function(req, res){
+        failureRedirect: "*"}), function(req, res){
             res.redirect("/loggedin")
         },
     );

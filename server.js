@@ -26,12 +26,11 @@ app.set("views", "./views");
 // Routes
 require("./routes/apiRoutes")(app);
 require("./routes/htmlRoutes")(app);
-
-//Trying set route for authController 
 require("./routes/authRoutes")(app);
-// console.log(require("./routes/authController"));
-
 require("./config/passport/passport")(passport, db.user);
+require("./config/passport/passport-login")(passport, db.user);
+
+
 var syncOptions = { force: false };
 
 // If running a test, set syncOptions.force to true
