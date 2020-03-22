@@ -4,8 +4,8 @@ var path = require("path");
 module.exports = function(app) {
   // 1st page to Load index login 
   app.get("/", function(req, res) { 
-    //will have Login as the default so will need to redirect to login.
-    res.sendFile(path.join(__dirname, "../views/index.html"));
+    //will have Login as the default 
+    res.redirect("/signin");
   });
 
   app.get("/signup", function(req, res) {
@@ -13,7 +13,7 @@ module.exports = function(app) {
    });
 
    app.get("/signin", function(req, res) { //was index here
-    res.sendFile(path.join(__dirname, "../views/signin.html"));
+    res.sendFile(path.join(__dirname, "../views/index.html"));
 
    });
 
@@ -42,9 +42,9 @@ module.exports = function(app) {
 
    //user LOGS OUT Page = this is the page that shows when user logs out
   app.get("/logout", function(req,res) {
-    res.sendFile(path.join(__dirname, "../views/logOut.html")); 
+    // res.sendFile(path.join(__dirname, "../views/logOut.html")); 
     // OR go back to home page 
-    // res.redirect("/");
+    res.redirect("/signin");
 
   });
 
