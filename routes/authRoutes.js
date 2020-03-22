@@ -19,7 +19,9 @@ module.exports = function (app){
  
     app.post("/auth/signin", passport.authenticate("local", {
         failureRedirect: "*", failureFlash:true}), function(req, res){
-            res.redirect("/loggedin")
+            res.redirect("/loggedin");
+            // console.log("blahhh")
+            // req.flash("info", "welcome"); //trying to get flash to work
         },
     );
  

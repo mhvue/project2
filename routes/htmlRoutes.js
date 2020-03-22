@@ -1,6 +1,5 @@
 var path = require("path");
 
-
 module.exports = function(app) {
   // 1st page to Load index login 
   app.get("/", function(req, res) { 

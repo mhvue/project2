@@ -12,7 +12,7 @@ module.exports = {
 
     signin: function(req, res) {
         res.render("/");
-        console.log("hellooo")
+        
     },
 
     index: function(req, res) {
