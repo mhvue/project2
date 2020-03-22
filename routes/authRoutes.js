@@ -7,7 +7,7 @@ module.exports = function (app){
     app.get("/auth/signin", authController.signin);
  
     app.post("/auth/signup", passport.authenticate("local", {
-        failureRedirect: "/signup"}),function(req,res){
+        failureRedirect: "/signup", failureFlash: true}),function(req,res){
             res.redirect("/loggedin")
             
         }
@@ -18,7 +18,7 @@ module.exports = function (app){
     app.get("/auth/logout", authController.logout);
  
     app.post("/auth/signin", passport.authenticate("local", {
-        failureRedirect: "*"}), function(req, res){
+        failureRedirect: "*", failureFlash:true}), function(req, res){
             res.redirect("/loggedin")
         },
     );
@@ -27,9 +27,7 @@ module.exports = function (app){
     function isLoggedIn(req, res, next) {
  
         if (req.isAuthenticated())
- 
             return next();
- 
         res.redirect("/signin");
  
     }
