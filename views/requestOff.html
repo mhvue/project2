@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>ABOT | Request Off Form</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
+        integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+    <link href="https://fonts.googleapis.com/css?family=Homemade+Apple|Open+Sans+Condensed:300&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="./assets/style.css">
+    <script src="https://code.jquery.com/jquery.js"></script>
+</head>
+
+<body>
+    <nav class="navbar navbar-light bg-light">
+        <a class="navbar-brand" href="./index.html">
+            <img src="/docs/4.4/assets/brand/bootstrap-solid.svg" width="30" height="30"
+                class="d-inline-block align-top" alt="ABOT Logo">
+            Request time off.
+        </a>
+        <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
+            <li class="nav-item">
+                <a class="nav-link" href="./index.html">Home</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="./schedulePage.html">View Schedule</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="./avail.html">Submit Availablity</a>
+            </li>
+        </ul>
+    </nav>
+    <div class="surveyBody">
+
+        <form name="requestOff">
+            <div class="form-group">
+                <label for="exampleFormControlInput1">First Name (required)</label>
+                <input name="firstName" class="form-control" id="firstName exampleFormControlInput1"
+                    placeholder="First Name">
+            </div>
+            <div class="form-group">
+                <label for="exampleFormControlInput1">Last Name (required)</label>
+                <input name="lastName" class="form-control" id="lastName exampleFormControlInput1"
+                    placeholder="Last Name">
+            </div>
+            <div class="form-group">
+                <label for="Date">Please choose a date from the options below. If the date you need is not an option,
+                    please reach out to your manager directly.</label>
+                <select class="form-control" id="date exampleFormControlSelect1">
+                    <option></option>
+                    <option></option>
+                    <option></option>
+                    <option></option>
+                    <option></option>
+                </select>
+            </div>
+
+            <div class="form-group">
+                <label for="Start Time">Shift Start Time</label>
+                <select class="form-control" id="startTime exampleFormControlSelect1">
+                    <option>8:00am</option>
+                    <option>9:00am</option>
+                    <option>12:00pm</option>
+                    <option>4:00pm</option>
+                </select>
+            </div>
+
+            <div class="form-group">
+                <label for="End Time">Shift End Time</label>
+                <select class="form-control" id="endTime exampleFormControlSelect1">
+                    <option>12:00pm</option>
+                    <option>3:00pm</option>
+                    <option>6:00pm</option>
+                    <option>9:00pm</option>
+                    <option>11:00pm</option>
+                </select>
+            </div>
+        </form>
+        <a href="./index.html" id="submitRequest" class="btn btn-primary btn-lg">
+            <span class="fa fa-th-list"></span> Submit</a>
+    </div>
+    </div>
+</body>
+
+<script type="text/javascript">
+
+    function validateForm() {
+        var x = document.forms["requestOff"]["firstName"].value;
+        var y = document.forms["requestOff"]["lastName"].value;
+        if (x == "" || y == "") {
+            alert("Please fill out required name field.");
+            return false;
+        }
+    };
+
+    $("#submitRequest").click(function (event) {
+        event.preventDefault();
+
+        var newRequest = {
+            firstname: $("#firstName").val().trim(),
+            lastname: $("#lastName").val().trim(),
+            date: $("#date").val().trim(),
+            startTime: $("#startTime").val().trim(),
+            endTime: $("#endTime").val().trim()
+        };
+        validateForm();
+
+        console.log(newRequest);
+
+
+        $.post("/api/requestOff", newRequest,
+            function (data) {
+
+
+                $("#firstName").val("");
+                $("#lastName").val("");
+                $("#date").val("");
+                $("#startTime").val("");
+                $("#endTime").val("");
+
+            });
+
+    });
+
+
+
+</script>
+
+</html>

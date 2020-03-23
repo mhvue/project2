@@ -1,6 +1,4 @@
-/**************** extend css start ****************/
-/**************** extend css start ****************/
-/**************** common css start ****************/
+
 @import url("https://fonts.googleapis.com/css?family=Montserrat:300,400|Playfair+Display:400,700,900&display=swap");
 /* line 3, /Applications/MAMP/htdocs/palash/cl/july 2019/july/194 Restaurant/194 Restaurant html/sass/_common.scss */
 body {
@@ -11,10 +9,6 @@ body {
   background-image: url(images/marble.jpg);
 }
 
-/* line 9, /Applications/MAMP/htdocs/palash/cl/july 2019/july/194 Restaurant/194 Restaurant html/sass/_common.scss */
-.message_submit_form:focus {
-  outline: none;
-}
 
 /* line 12, /Applications/MAMP/htdocs/palash/cl/july 2019/july/194 Restaurant/194 Restaurant html/sass/_common.scss */
 input:hover, input:focus {
@@ -631,25 +625,6 @@ ul {
 .btn_3:hover {
   background-color: #ffb830;
   color: #fff;
-}
-
-/* line 140, /Applications/MAMP/htdocs/palash/cl/july 2019/july/194 Restaurant/194 Restaurant html/sass/_button.scss */
-.btn_4 {
-  display: inline-block;
-  font-size: 14px;
-  color: #fff;
-  text-transform: capitalize;
-  -webkit-transition: 0.5s;
-  transition: 0.5s;
-  padding: 14.5px 43px;
-  background-color: #ff6426;
-  margin-top: 20px;
-}
-
-/* line 149, /Applications/MAMP/htdocs/palash/cl/july 2019/july/194 Restaurant/194 Restaurant html/sass/_button.scss */
-.btn_4:hover {
-  color: #fff;
-  background-color: #ffb830;
 }
 
 /* line 152, /Applications/MAMP/htdocs/palash/cl/july 2019/july/194 Restaurant/194 Restaurant html/sass/_button.scss */
@@ -1822,7 +1797,9 @@ ul {
   padding-bottom: 30px;
   margin-top: 55px;
 }
-
+.navbar-toggler  {
+  background: peachpuff;
+}
 /* line 1226, /Applications/MAMP/htdocs/palash/cl/july 2019/july/194 Restaurant/194 Restaurant html/sass/_blog.scss */
 .single-post-area .navigation-area p {
   margin-bottom: 0px;
