@@ -1,4 +1,3 @@
-//BELOW IS FOR SIGNING UP A NEW USER 
 var bCrypt = require("bcrypt");
 var UserDB = require("../../models");
 var LocalStrategy = require("passport-local").Strategy;
