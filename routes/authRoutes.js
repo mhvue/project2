@@ -1,61 +1,37 @@
-//STARTING WRITE CODE HERE: 
+var passport = require("passport");
+var authController = require("./authController.js");
 
-//requiring the authController.js
+module.exports = function (app){
+    app.get("/auth/signup", authController.signup);
 
-// var authController = require("./authController.js");
-
-///this is our GET to the sign up page w/ authControlLer
-// module.exports = function (app){
-//     app.get("/signup", authController.signup);
-// }
-
-// Full expected result of this page as laid out in documentation below:
-
-// var authController = require('../controllers/authcontroller.js');
+    app.get("/auth/signin", authController.signin);
+ 
+    app.post("/auth/signup", passport.authenticate("local", {
+        failureRedirect: "/signup", failureFlash: true}),function(req,res){
+            res.redirect("/loggedin")
+            
+        }
+    );
+ 
+    app.get("/auth/loggedin", isLoggedIn, authController.index);
+ 
+    app.get("/auth/logout", authController.logout);
+ 
+    app.post("/auth/signin", passport.authenticate("local", {
+        failureRedirect: "*", failureFlash:true}), function(req, res){
+            res.redirect("/loggedin");
+            // console.log("blahhh")
+            // req.flash("info", "welcome"); //trying to get flash to work
+        },
+    );
  
  
-// module.exports = function(app, passport) {
+    function isLoggedIn(req, res, next) {
  
+        if (req.isAuthenticated())
+            return next();
+        res.redirect("/signin");
  
-//     app.get('/signup', authController.signup);
+    }
  
- 
-//     app.get('/signin', authController.signin);
- 
- 
-//     app.post('/signup', passport.authenticate('local-signup', {
-//             successRedirect: '/dashboard',
- 
-//             failureRedirect: '/signup'
-//         }
- 
-//     ));
- 
- 
-//     app.get('/dashboard', isLoggedIn, authController.dashboard);
- 
- 
- 
-//     app.get('/logout', authController.logout);
- 
- 
-//     app.post('/signin', passport.authenticate('local-signin', {
-//             successRedirect: '/dashboard',
- 
-//             failureRedirect: '/signin'
-//         }
- 
-//     ));
- 
- 
-//     function isLoggedIn(req, res, next) {
- 
-//         if (req.isAuthenticated())
- 
-//             return next();
- 
-//         res.redirect('/signin');
- 
-//     }
- 
-// }
+}
