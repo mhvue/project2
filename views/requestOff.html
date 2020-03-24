@@ -37,30 +37,28 @@
 
         <form name="requestOff">
             <div class="form-group">
-                <label for="exampleFormControlInput1">First Name (required)</label>
-                <input name="firstName" class="form-control" id="firstName exampleFormControlInput1"
-                    placeholder="First Name">
+                <label for="firstName">First Name (required)</label>
+                <input name="firstName" class="requiredFirst form-control" id="firstName" placeholder="First Name">
             </div>
             <div class="form-group">
-                <label for="exampleFormControlInput1">Last Name (required)</label>
-                <input name="lastName" class="form-control" id="lastName exampleFormControlInput1"
-                    placeholder="Last Name">
+                <label for="lastName">Last Name (required)</label>
+                <input name="lastName" class="requiredLast form-control" id="lastName" placeholder="Last Name">
             </div>
             <div class="form-group">
-                <label for="Date">Please choose a date from the options below. If the date you need is not an option,
+                <label for="date">Please choose a date from the options below. If the date you need is not an option,
                     please reach out to your manager directly.</label>
-                <select class="form-control" id="date exampleFormControlSelect1">
-                    <option></option>
-                    <option></option>
-                    <option></option>
-                    <option></option>
-                    <option></option>
+                <select class="form-control" id="date" name="date">
+                    <option>04/01/2020</option>
+                    <option>04/02/2020</option>
+                    <option>04/03/2020</option>
+                    <option>04/04/2020</option>
+                    <option>04/05/2020</option>
                 </select>
             </div>
 
             <div class="form-group">
-                <label for="Start Time">Shift Start Time</label>
-                <select class="form-control" id="startTime exampleFormControlSelect1">
+                <label for="startTime">Shift Start Time</label>
+                <select class="form-control" id="startTime" name="startTime">
                     <option>8:00am</option>
                     <option>9:00am</option>
                     <option>12:00pm</option>
@@ -69,8 +67,8 @@
             </div>
 
             <div class="form-group">
-                <label for="End Time">Shift End Time</label>
-                <select class="form-control" id="endTime exampleFormControlSelect1">
+                <label for="endTime">Shift End Time</label>
+                <select class="form-control" id="endTime" name="endTime">
                     <option>12:00pm</option>
                     <option>3:00pm</option>
                     <option>6:00pm</option>
@@ -83,21 +81,46 @@
             <span class="fa fa-th-list"></span> Submit</a>
     </div>
     </div>
+
+    <div class="modal fade myModal" id="myModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle"
+        aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalCenterTitle">Request successfully submitted!</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Submit another
+                        request.</button>
+                    <button type="button" class="btn btn-primary">Back to home.</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
 </body>
 
 <script type="text/javascript">
-
     function validateForm() {
         var x = document.forms["requestOff"]["firstName"].value;
         var y = document.forms["requestOff"]["lastName"].value;
-        if (x == "" || y == "") {
-            alert("Please fill out required name field.");
+        if (x == "") {
+            $(".requiredFirst").after("Please fill out required name field.");
             return false;
-        }
+        } else if (y == "") {
+            $(".requiredLast").after("Please fill out required name field.");
+            return false;
+        } return true;
     };
 
     $("#submitRequest").click(function (event) {
         event.preventDefault();
+
 
         var newRequest = {
             firstname: $("#firstName").val().trim(),
@@ -106,26 +129,31 @@
             startTime: $("#startTime").val().trim(),
             endTime: $("#endTime").val().trim()
         };
-        validateForm();
-
-        console.log(newRequest);
+        if (validateForm()) {
 
 
-        $.post("/api/requestOff", newRequest,
-            function (data) {
+            console.log(newRequest);
 
 
-                $("#firstName").val("");
-                $("#lastName").val("");
-                $("#date").val("");
-                $("#startTime").val("");
-                $("#endTime").val("");
+            $.post("/api/requestoff", newRequest,
+                function (data) {
 
-            });
+                    if (data) {
+
+                        $("#firstName").val("");
+                        $("#lastName").val("");
+                        $("#date").val("");
+                        $("#startTime").val("");
+                        $("#endTime").val("");
+
+                    } else {
+                        alert("try again")
+                    }
+
+                });
+        };
 
     });
-
-
 
 </script>
 

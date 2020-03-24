@@ -13,7 +13,6 @@ var PORT = process.env.PORT || 8080;
 
 // Middleware
 app.use(express.urlencoded({ extended: false }));
-app.use(flash());
 app.use(express.json());
 app.use(express.static("public"));
 //For Passport
@@ -32,7 +31,7 @@ require("./config/passport/passport")(passport, db.user);
 require("./config/passport/passport-login")(passport, db.user);
 
 
-var syncOptions = { force: false };
+var syncOptions = { force: true };
 
 // If running a test, set syncOptions.force to true
 // clearing the `testdb`
