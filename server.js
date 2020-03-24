@@ -1,6 +1,5 @@
 require("dotenv").config();
 var express = require("express");
-var exphbs = require("express-handlebars");
 
 var db = require("./models");
 
@@ -27,10 +26,9 @@ app.set("views", "./views");
 // Routes
 require("./routes/apiRoutes")(app);
 require("./routes/htmlRoutes")(app);
-
-//Trying set route for authController 
-require("./routes/authController");
-// console.log(require("./routes/authController"));
+require("./routes/authRoutes")(app);
+require("./config/passport/passport")(passport, db.user);
+require("./config/passport/passport-login")(passport, db.user);
 
 
 var syncOptions = { force: true };

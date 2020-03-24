@@ -25,14 +25,14 @@ module.exports = function (app) {
     });
 
     app.post("/api/avail", function (req, res) { //this is to be able to add availability for the week
-        db.Schedule.create({
+        db.schedule.create({
             firstName: req.body.firstName,
             lastName: req.body.lastName,
             date: req.body.date,
             startTime: req.body.startTime,
             endTime: req.body.endTime
-        }).then(function (dbSchedule) {
-            res.json(dbSchedule);
+        }).then(function (dbschedule) {
+            res.json(dbschedule);
         });
     });
 
