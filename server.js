@@ -6,7 +6,7 @@ var db = require("./models");
 var app = express();
 var passport = require("passport")
 var session = require("express-session");
-var bodyParser = require("body-parser");
+var bodyParser= require("body-parser");
 
 
 var PORT = process.env.PORT || 8080;
@@ -14,6 +14,8 @@ var PORT = process.env.PORT || 8080;
 // Middleware
 app.use(express.urlencoded({ extended: false }));
 app.use(express.json());
+app.use(bodyParser.urlencoded({extended:true}));
+app.use(bodyParser.json());
 app.use(express.static("public"));
 //For Passport
 app.use(session({secret: "keyboard cat",resave: true, saveUninitialized:true}));
@@ -27,11 +29,11 @@ app.set("views", "./views");
 require("./routes/apiRoutes")(app);
 require("./routes/htmlRoutes")(app);
 require("./routes/authRoutes")(app);
-require("./config/passport/passport")(passport, db.user);
-require("./config/passport/passport-login")(passport, db.user);
+require("./config/passport/passport-logic")(passport, db.user);
 
 
-var syncOptions = { force: true };
+
+var syncOptions = { force: false };
 
 // If running a test, set syncOptions.force to true
 // clearing the `testdb`

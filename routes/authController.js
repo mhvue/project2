@@ -5,13 +5,12 @@
 module.exports = {
 
     signup: function(req, res) {
-        res.render("signup");
-        console.log("hello")
+        res.render("/signup");
     },
 
 
     signin: function(req, res) {
-        res.render("/");
+        res.render("/loggedin");
         
     },
 
