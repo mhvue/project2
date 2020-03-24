@@ -3,8 +3,8 @@ var db = require("../models");
 module.exports = function (app) {
     // Get all examples
     app.get("/api/schedule", function (req, res) { //this is to display the full work schedule currently
-        db.Schedule.findAll({}).then(function (dbSchedule) {
-            res.json(dbSchedule);
+        db.schedule.findAll({}).then(function (dbschedule) {
+            res.json(dbschedule);
         });
     });
 
