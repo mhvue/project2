@@ -7,7 +7,6 @@ var app = express();
 var passport = require("passport")
 var session = require("express-session");
 var bodyParser = require("body-parser");
-var flash = require("express-flash");
 
 
 var PORT = process.env.PORT || 8080;

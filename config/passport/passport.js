@@ -1,10 +1,12 @@
+//BELOW IS FOR SIGNING UP A NEW USER 
+
 var bCrypt = require("bcrypt");
 var UserDB = require("../../models");
 
 module.exports = function(passport, user){
     var LocalStrategy = require("passport-local").Strategy;
 
-//BELOW IS FOR SIGNING UP A NEW USER 
+
     passport.use(new LocalStrategy(
         {
             usernameField: "email",

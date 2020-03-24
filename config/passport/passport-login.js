@@ -1,3 +1,4 @@
+//BELOW IS FOR LOGGING IN AN EXISTING USER 
 var bCrypt = require("bcrypt");
 var UserDB = require("../../models");
 
