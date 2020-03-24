@@ -38,13 +38,11 @@
         <form name="requestOff">
             <div class="form-group">
                 <label for="firstName">First Name (required)</label>
-                <input name="firstName" class="requiredFirst form-control" id="firstName"
-                    placeholder="First Name">
+                <input name="firstName" class="requiredFirst form-control" id="firstName" placeholder="First Name">
             </div>
             <div class="form-group">
                 <label for="lastName">Last Name (required)</label>
-                <input name="lastName" class="requiredLast form-control" id="lastName"
-                    placeholder="Last Name">
+                <input name="lastName" class="requiredLast form-control" id="lastName" placeholder="Last Name">
             </div>
             <div class="form-group">
                 <label for="date">Please choose a date from the options below. If the date you need is not an option,
@@ -83,23 +81,46 @@
             <span class="fa fa-th-list"></span> Submit</a>
     </div>
     </div>
+
+    <div class="modal fade myModal" id="myModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle"
+        aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalCenterTitle">Request successfully submitted!</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Submit another
+                        request.</button>
+                    <button type="button" class="btn btn-primary">Back to home.</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
 </body>
 
 <script type="text/javascript">
     function validateForm() {
         var x = document.forms["requestOff"]["firstName"].value;
         var y = document.forms["requestOff"]["lastName"].value;
-        if (x == ""){
-            $( ".requiredFirst" ).after( "Please fill out required name field." );
+        if (x == "") {
+            $(".requiredFirst").after("Please fill out required name field.");
             return false;
         } else if (y == "") {
-            $( ".requiredLast" ).after( "Please fill out required name field." );
+            $(".requiredLast").after("Please fill out required name field.");
             return false;
         } return true;
     };
 
     $("#submitRequest").click(function (event) {
         event.preventDefault();
+
 
         var newRequest = {
             firstname: $("#firstName").val().trim(),
@@ -108,35 +129,31 @@
             startTime: $("#startTime").val().trim(),
             endTime: $("#endTime").val().trim()
         };
-        if(validateForm()) {
+        if (validateForm()) {
 
-            
+
             console.log(newRequest);
-            
-            
+
+
             $.post("/api/requestoff", newRequest,
-            function (data) {
+                function (data) {
 
-                if(data){
-                    alert("Request Submitted!")
+                    if (data) {
 
-                    $("#firstName").val("");
-                    $("#lastName").val("");
-                    $("#date").val("");
-                    $("#startTime").val("");
-                    $("#endTime").val("");
-                } else {
-                    alert("try again")
-                }
-                
-                
-                
-            });
+                        $("#firstName").val("");
+                        $("#lastName").val("");
+                        $("#date").val("");
+                        $("#startTime").val("");
+                        $("#endTime").val("");
+
+                    } else {
+                        alert("try again")
+                    }
+
+                });
         };
 
     });
-
-
 
 </script>
 
