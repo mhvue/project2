@@ -1,40 +1,30 @@
  //starting code for authController 
 
-module.exports = function (){
-
-    //the below should take us to sign up if it works
-exports.signup = function(req, res) {
-    // res.render("signup"); 
-    console.log("hellloo")
-}
-}
-
 // Talked with Kathy - we want to set this up like an object with each function a method inside - this is what sarah was trying to get at with the objects on Wed =
 
-// module.exports = {
+module.exports = {
 
-//     signup: function(req, res) {
-//         res.render("signup");
-//         console.log("hello")
-//     },
+    signup: function(req, res) {
+        res.render("signup");
+        console.log("hello")
+    },
 
-//     signin: function(req, res) {
-//         res.render("signin");
-//         console.log("hellooo")
-//     },
 
-//     dashboard: function(req, res) {
-//         res.render("dashboard");
-//         console.log("hello")
-//     },
+    signin: function(req, res) {
+        res.render("/");
+        
+    },
 
-        // logout: function(req, res) {
- 
-        //     req.session.destroy(function(err) {
-         
-        //         res.redirect('/');
-         
-        //     });
-         
-        // }
-// };
+    index: function(req, res) {
+        res.render("/loggedin");
+
+    },
+
+    logout: function(req, res) {
+        req.session.destroy(function(err) {
+            res.redirect('/');
+        
+        });
+        
+    }
+};
