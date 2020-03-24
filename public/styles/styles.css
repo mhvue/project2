@@ -6,11 +6,12 @@ body {
   padding: 0;
   margin: 0;
   font-size: 14px;
-  background-image: url(images/marble.jpg);
+  background-image: url(images/marble.jpg)
 }
 
 
-/* line 12, /Applications/MAMP/htdocs/palash/cl/july 2019/july/194 Restaurant/194 Restaurant html/sass/_common.scss */
+
+/* line 12, /Applications/MAMP/htdocs/palash/cl/july 2019/july/194 Restaurant/194 Restaurant html/sass/_common.scss
 input:hover, input:focus {
   outline: none !important;
   box-shadow: 0px 0px 0px 0px transparent !important;
@@ -2340,10 +2341,7 @@ ul {
 .banner_part {
   height: 1080px;
   position: relative;
-  background-image: url();
-  background-repeat: no-repeat;
-  background-size: cover;
-  background-position: center;
+
 }
 
 @media (max-width: 991px) {
@@ -2356,7 +2354,7 @@ ul {
 @media only screen and (min-width: 992px) and (max-width: 1200px) {
   /* line 2, /Applications/MAMP/htdocs/palash/cl/july 2019/july/194 Restaurant/194 Restaurant html/sass/_banner.scss */
   .banner_part {
-    height: 650px;
+    height: 300x;
   }
 }
 
@@ -6242,7 +6240,7 @@ h6 {
   .footer-area .single-footer-widget {
     margin-bottom: 30px;
   }
-}
+} */
 
 /* line 13, /Applications/MAMP/htdocs/palash/cl/july 2019/july/194 Restaurant/194 Restaurant html/sass/_footer.scss */
 .footer-area .single-footer-widget p {
@@ -6402,11 +6400,6 @@ h6 {
   height: 48px;
 }
 
-/* line 122, /Applications/MAMP/htdocs/palash/cl/july 2019/july/194 Restaurant/194 Restaurant html/sass/_footer.scss */
-.footer-area .form-control:focus {
-  outline: none !important;
-  border-color: #e9ecee;
-}
 
 /* line 127, /Applications/MAMP/htdocs/palash/cl/july 2019/july/194 Restaurant/194 Restaurant html/sass/_footer.scss */
 .footer-area .btn {
@@ -6522,15 +6515,5 @@ h6 {
   color: #d6ad86;
 }
 
-/* line 204, /Applications/MAMP/htdocs/palash/cl/july 2019/july/194 Restaurant/194 Restaurant html/sass/_footer.scss */
-.footer-area .footer_1 .social_icon {
-  margin-top: 25px;
-}
 
-/* line 206, /Applications/MAMP/htdocs/palash/cl/july 2019/july/194 Restaurant/194 Restaurant html/sass/_footer.scss */
-.footer-area .footer_1 .social_icon a {
-  color: #fff;
-  margin-right: 10px;
-}
 
-/*# sourceMappingURL=../css/style.map */
