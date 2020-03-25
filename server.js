@@ -33,6 +33,7 @@ require("./config/passport/passport-logic")(passport, db.user);
 
 
 
+
 var syncOptions = { force: false };
 
 // If running a test, set syncOptions.force to true

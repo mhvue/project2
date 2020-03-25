@@ -1,5 +1,7 @@
  var passport = require("passport");
 var authController = require("./authController.js");
+var bodyParser= require("body-parser");
+
 
 module.exports = function (app){
     app.get("/auth/signup", authController.signup);
@@ -17,14 +19,14 @@ module.exports = function (app){
     app.get("/auth/loggedin", isLoggedIn, authController.index);
  
     app.get("/auth/logout", authController.logout);
- 
-    app.post("/auth/signin", passport.authenticate("local.signin" 
-    ,{
-        failureRedirect: "*"}), function(req, res){
-            res.redirect("/loggedin");
+
+    app.post("/auth/signin", passport.authenticate("signin",{
+            successRedirect: "/loggedin",
+            failureRedirect: "/signin"})
             
-        }
+        
     );
+
 
 
  

@@ -93,6 +93,12 @@
                     </button>
                 </div>
                 <div class="modal-body">
+                    <h2>hello</h2>
+                    <p id= "firstName" ></p>
+                    <p id="lastName"></p> 
+                    <p id="date"></p> 
+                    <p id="startTime"></p> 
+                    <p id="endTime"></p> 
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Submit another
@@ -130,33 +136,38 @@
             endTime: $("#endTime").val().trim()
         };
         if (validateForm()) {
-
-
             console.log(newRequest);
-
-
-            $.post("/api/requestoff", newRequest,
-                function (data) {
-
-                    if (data) {
-
-                        $("#firstName").val("");
-                        $("#lastName").val("");
-                        $("#date").val("");
-                        $("#startTime").val("");
-                        $("#endTime").val("");
+            $.post("/api/requestoff", newRequest,function (data) {
+                console.log(data);
+                    // if (data ) {
                        
+                        $("#firstName").text(data.firstname)
+                        $("#lastName").text(data.lastname)
+                        $("#date").text(data.date)
+                        $("#startTime").text(data.startTime)
+                        $("#endTime").text(data.endTime)
+                        $("#myModal").modal("toggle");
+                    // } 
+                    // if()
+                    //     else {
+                    //     alert("try again");
+                        
+        //     }
 
-                    } else {
-                        // alert("try again");
-                        $("#mymodal").modal("toggle");
-                    }
+        // else{
+        //     console.log("uhoh")
+        // }
 
                 });
-        };
+    }
+});
+//     );
+// });
 
-    });
 
 </script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
+
 
 </html>
