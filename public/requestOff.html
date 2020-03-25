@@ -6,12 +6,13 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>ABOT | Request Off Form</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
         integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
     <link href="https://fonts.googleapis.com/css?family=Homemade+Apple|Open+Sans+Condensed:300&display=swap"
         rel="stylesheet">
     <link rel="stylesheet" href="./assets/style.css">
-    <script src="https://code.jquery.com/jquery.js"></script>
 </head>
 
 <body>
@@ -77,69 +78,67 @@
                 </select>
             </div>
         </form>
-        <a href="./index.html" id="submitRequest" class="btn btn-primary btn-lg">
+        <a href="./index.html" id="submitRequest" data-toggle="modal" data-target="#myModal" class="btn btn-primary btn-lg">
             <span class="fa fa-th-list"></span> Submit</a>
     </div>
     </div>
-
-    <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle"
-        aria-hidden="true">
-        <div class="modal-dialog modal-dialog-centered" role="document">
-            <div class="modal-content">
+    <div class="modal fade" id="myModal" role="dialog">
+            <div class="modal-dialog">
+            
+              <!-- Modal content-->
+              <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalCenterTitle">Request successfully submitted!</h5>
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                    </button>
+                  <button type="button" class="close" data-dismiss="modal">&times;</button>
+                  <h4 class="modal-title">Modal Header</h4>
                 </div>
                 <div class="modal-body">
+                  <p>Some text in the modal.</p>
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Submit another
-                        request.</button>
-                    <button type="button" class="btn btn-primary">Back to home.</button>
+                  <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
                 </div>
+              </div>
+              
             </div>
-        </div>
-    </div>
+          </div>
 
 </body>
 
-<script type="text/javascript">
-    function validateForm() {
-        var x = document.forms["requestOff"]["firstName"].value;
-        var y = document.forms["requestOff"]["lastName"].value;
-        if (x == "") {
-            $(".requiredFirst").after("Please fill out required name field.");
-            return false;
-        } else if (y == "") {
-            $(".requiredLast").after("Please fill out required name field.");
-            return false;
-        } return true;
+<script>
+$(document).ready(function(){
+
+function validateForm() {
+    var x = document.forms["requestOff"]["firstName"].value;
+    var y = document.forms["requestOff"]["lastName"].value;
+    if (x == "") {
+        $(".requiredFirst").after("Please fill out required name field.");
+        return false;
+    } else if (y == "") {
+        $(".requiredLast").after("Please fill out required name field.");
+        return false;
+    } return true;
+};
+
+$("#submitRequest").click(function (event) {
+    event.preventDefault();
+    
+    var newRequest = {
+        firstname: $("#firstName").val().trim(),
+        lastname: $("#lastName").val().trim(),
+        date: $("#date").val().trim(),
+        startTime: $("#startTime").val().trim(),
+        endTime: $("#endTime").val().trim()
     };
-
-    $("#submitRequest").click(function (event) {
-        event.preventDefault();
-
-
-        var newRequest = {
-            firstname: $("#firstName").val().trim(),
-            lastname: $("#lastName").val().trim(),
-            date: $("#date").val().trim(),
-            startTime: $("#startTime").val().trim(),
-            endTime: $("#endTime").val().trim()
-        };
-        if (validateForm()) {
-
-
-            console.log(newRequest);
-
-
-            $.post("/api/requestoff", newRequest,
-                function (data) {
-
-                    if (data) {
-
+    if (validateForm()) {
+        
+        $("#myModal").modal('show');
+        console.log(newRequest);
+        
+        $.post("/api/requestoff", newRequest,
+        function (data) {
+            
+            if (data) {
+                
                         $("#firstName").val("");
                         $("#lastName").val("");
                         $("#date").val("");
@@ -154,6 +153,7 @@
         };
 
     });
+});
 
 </script>
 
