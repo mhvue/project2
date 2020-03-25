@@ -21,10 +21,8 @@
 </head>
 
 <body>
-
     <nav class="navbar navbar-light bg-light">
-            <img src="./styles/images/Logo.png"
-                class="d-inline-block align-top" alt="ABOT Logo">
+        <img src="./styles/images/Logo.png" class="d-inline-block align-top" alt="ABOT Logo">
 
         <ul class="navbar-nav mx-auto mt-2 mt-lg-0">
             <li class="nav-item">
@@ -38,9 +36,12 @@
             </li>
         </ul>
     </nav>
-    <div class="surveyBody p-5">
 
+    <div class="surveyBody p-5">
         <form name="submitAvail">
+                <h1>Submit availability</h1>
+                <br>
+                <br>
             <div class="form-group">
                 <label for="exampleFormControlInput1">First Name (required)</label>
                 <input name="firstName" class="requiredFirst form-control" id="firstName" placeholder="First Name">
@@ -82,10 +83,48 @@
                 </select>
             </div>
         </form>
-        <a href="./index.html" id="submitRequest" class="btn btn-dark btn-lg">
+        <br>
+        <a href="./index.html" id="submitRequest" class="btn btn-dark btn-md">
             <span class="fa fa-th-list"></span> Submit</a>
     </div>
     </div>
+
+    <div class="modal fade" id="successModal" role="dialog">
+        <div class="modal-dialog">
+            <!-- Modal content-->
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4 class="modal-title">Submission Success!</h4>
+                </div>
+                <div class="modal-body">
+                    <p>Your availability has successfully been submitted. If for any reason you are no longer able to
+                        fulfill this shift, please reach out to your manager as soon as possible.</p>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-dark" data-dismiss="modal">Close.</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal fade" id="errModal" role="dialog">
+        <div class="modal-dialog">
+            <!-- Modal content-->
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4 class="modal-title">Submission Failed!</h4>
+                </div>
+                <div class="modal-body">
+                    <p>There has been an issue submitting your availability. Please try again or contact your manager
+                        directly.</p>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-dark" data-dismiss="modal">Try again.</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
 </body>
 
 <script type="text/javascript">
@@ -114,24 +153,23 @@
         };
         validateForm();
 
-        console.log(newAvail);
-
-
         $.post("/api/avail", newAvail,
             function (data) {
 
+                if (data) {
 
-                $("#firstName").val("");
-                $("#lastName").val("");
-                $("#date").val("");
-                $("#startTime").val("");
-                $("#endTime").val("");
+                    $("#successModal").modal('show');
 
+                    $("#firstName").val("");
+                    $("#lastName").val("");
+                    $("#date").val("");
+                    $("#startTime").val("");
+                    $("#endTime").val("");
+                } else {
+                    $("#errModal").modal('show');
+                }
             });
-
     });
-
-
 
 </script>
 

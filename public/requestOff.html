@@ -6,23 +6,24 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>ABOT | Request Off Form</title>
+
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"
+        integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6"
+        crossorigin="anonymous"></script>
+
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
         integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
     <link href="https://fonts.googleapis.com/css?family=Homemade+Apple|Open+Sans+Condensed:300&display=swap"
         rel="stylesheet">
-    <link rel="stylesheet" href="./assets/style.css">
+    <link rel="stylesheet" href="./styles/styles.css">
 </head>
 
 <body>
     <nav class="navbar navbar-light bg-light">
-        <a class="navbar-brand" href="./index.html">
-            <img src="/docs/4.4/assets/brand/bootstrap-solid.svg" width="30" height="30"
-                class="d-inline-block align-top" alt="ABOT Logo">
-            Request time off.
-        </a>
-        <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
+        <img src="./styles/images/Logo.png" class="d-inline-block align-top" alt="ABOT Logo">
+
+        <ul class="navbar-nav mx-auto mt-2 mt-lg-0">
             <li class="nav-item">
                 <a class="nav-link" href="./index.html">Home</a>
             </li>
@@ -30,13 +31,16 @@
                 <a class="nav-link" href="./schedulePage.html">View Schedule</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="./avail.html">Submit Availablity</a>
+                <a class="nav-link" href="./avail.html">Submit Availability</a>
             </li>
         </ul>
     </nav>
-    <div class="surveyBody">
 
+    <div class="surveyBody p-5">
         <form name="requestOff">
+            <h1>Request off</h1>
+            <br>
+            <br>
             <div class="form-group">
                 <label for="firstName">First Name (required)</label>
                 <input name="firstName" class="requiredFirst form-control" id="firstName" placeholder="First Name">
@@ -78,82 +82,97 @@
                 </select>
             </div>
         </form>
-        <a href="./index.html" id="submitRequest" data-toggle="modal" data-target="#myModal" class="btn btn-primary btn-lg">
+        <br>
+        <a href="./index.html" id="submitRequest" data-toggle="modal" data-target="#myModal"
+            class="btn btn-dark btn-md">
             <span class="fa fa-th-list"></span> Submit</a>
     </div>
     </div>
-    <div class="modal fade" id="myModal" role="dialog">
-            <div class="modal-dialog">
-            
-              <!-- Modal content-->
-              <div class="modal-content">
+    <div class="modal fade" id="successModal" role="dialog">
+        <div class="modal-dialog">
+            <!-- Modal content-->
+            <div class="modal-content">
                 <div class="modal-header">
-                  <button type="button" class="close" data-dismiss="modal">&times;</button>
-                  <h4 class="modal-title">Modal Header</h4>
+                    <!-- <button type="button" class="close" data-dismiss="modal">&times;</button> -->
+                    <h4 class="modal-title">Request Success!</h4>
                 </div>
                 <div class="modal-body">
-                  <p>Some text in the modal.</p>
+                    <p>Your request has successfully been submitted. Please check in with your manager on approval,
+                        questions or concerns.</p>
                 </div>
                 <div class="modal-footer">
-                  <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-dark" data-dismiss="modal">Close.</button>
                 </div>
-              </div>
-              
             </div>
-          </div>
+        </div>
+    </div>
+
+    <div class="modal fade" id="errModal" role="dialog">
+        <div class="modal-dialog">
+            <!-- Modal content-->
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4 class="modal-title">Request Failed!</h4>
+                </div>
+                <div class="modal-body">
+                    <p>There has been an issue submitting your request. Please try again or contact your manager
+                        directly.</p>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-dark" data-dismiss="modal">Try again.</button>
+                </div>
+            </div>
+        </div>
+    </div>
 
 </body>
 
 <script>
-$(document).ready(function(){
+    $(document).ready(function () {
 
-function validateForm() {
-    var x = document.forms["requestOff"]["firstName"].value;
-    var y = document.forms["requestOff"]["lastName"].value;
-    if (x == "") {
-        $(".requiredFirst").after("Please fill out required name field.");
-        return false;
-    } else if (y == "") {
-        $(".requiredLast").after("Please fill out required name field.");
-        return false;
-    } return true;
-};
-
-$("#submitRequest").click(function (event) {
-    event.preventDefault();
-    
-    var newRequest = {
-        firstname: $("#firstName").val().trim(),
-        lastname: $("#lastName").val().trim(),
-        date: $("#date").val().trim(),
-        startTime: $("#startTime").val().trim(),
-        endTime: $("#endTime").val().trim()
-    };
-    if (validateForm()) {
-        
-        $("#myModal").modal('show');
-        console.log(newRequest);
-        
-        $.post("/api/requestoff", newRequest,
-        function (data) {
-            
-            if (data) {
-                
-                        $("#firstName").val("");
-                        $("#lastName").val("");
-                        $("#date").val("");
-                        $("#startTime").val("");
-                        $("#endTime").val("");
-
-                    } else {
-                        alert("try again")
-                    }
-
-                });
+        function validateForm() {
+            var x = document.forms["requestOff"]["firstName"].value;
+            var y = document.forms["requestOff"]["lastName"].value;
+            if (x == "") {
+                $(".requiredFirst").after("Please fill out required name field.");
+                return false;
+            } else if (y == "") {
+                $(".requiredLast").after("Please fill out required name field.");
+                return false;
+            } return true;
         };
 
+        $("#submitRequest").click(function (event) {
+            event.preventDefault();
+
+            var newRequest = {
+                firstname: $("#firstName").val().trim(),
+                lastname: $("#lastName").val().trim(),
+                date: $("#date").val().trim(),
+                startTime: $("#startTime").val().trim(),
+                endTime: $("#endTime").val().trim()
+            };
+            if (validateForm()) {
+
+                $.post("/api/requestoff", newRequest,
+                    function (data) {
+
+                        if (data) {
+                            $("#successModal").modal('show');
+
+                            $("#firstName").val("");
+                            $("#lastName").val("");
+                            $("#date").val("");
+                            $("#startTime").val("");
+                            $("#endTime").val("");
+
+                        } else {
+                            $("#errModal").modal('show');
+                        }
+                    });
+            };
+        });
     });
-});
 
 </script>
 
