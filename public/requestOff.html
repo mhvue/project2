@@ -12,6 +12,8 @@
         integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6"
         crossorigin="anonymous"></script>
 
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.24.0/moment.min.js"></script>
+
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
         integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
     <link href="https://fonts.googleapis.com/css?family=Homemade+Apple|Open+Sans+Condensed:300&display=swap"
@@ -25,17 +27,15 @@
 
         <ul class="navbar-nav mx-auto mt-2 mt-lg-0">
             <li class="nav-item">
-                <a class="nav-link" href="./index.html">Home</a>
-            </li>
-            <li class="nav-item">
                 <a class="nav-link" href="./schedulePage.html">View Schedule</a>
             </li>
             <li class="nav-item">
                 <a class="nav-link" href="./avail.html">Submit Availability</a>
             </li>
             <li class="nav-item">
-                    <a class="nav-link" id="logout" name="logout" href="/auth/logout" method="get" action="logout">Logout</a>
-                </li>
+                <a class="nav-link" id="logout" name="logout" href="/auth/logout" method="get"
+                    action="logout">Logout</a>
+            </li>
         </ul>
     </nav>
 
@@ -56,11 +56,7 @@
                 <label for="date">Please choose a date from the options below. If the date you need is not an option,
                     please reach out to your manager directly.</label>
                 <select class="form-control" id="date" name="date">
-                    <option>04/01/2020</option>
-                    <option>04/02/2020</option>
-                    <option>04/03/2020</option>
-                    <option>04/04/2020</option>
-                    <option>04/05/2020</option>
+
                 </select>
             </div>
 
@@ -129,8 +125,29 @@
     </div>
 
 </body>
-
 <script>
+    moment().format();
+
+    var dates = {
+        firstDate: moment().add(14, 'days').format('L'),
+        secondDate: moment().add(15, 'days').format('L'),
+        thirdDate: moment().add(16, 'days').format('L'),
+        fourthDate: moment().add(17, 'days').format('L'),
+        fifthDate: moment().add(18, 'days').format('L'),
+        sixthDate: moment().add(19, 'days').format('L'),
+        seventhDate: moment().add(20, 'days').format('L'),
+    };
+
+    $("#date").append(
+        $("<option>").text(dates.firstDate),
+        $("<option>").text(dates.secondDate),
+        $("<option>").text(dates.thirdDate),
+        $("<option>").text(dates.fourthDate),
+        $("<option>").text(dates.fifthDate),
+        $("<option>").text(dates.sixthDate),
+        $("<option>").text(dates.seventhDate),
+    );
+
     $(document).ready(function () {
 
         function validateForm() {
