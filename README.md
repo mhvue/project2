@@ -8,13 +8,13 @@ User friendly scheduler at your convenience. Stay up to date with your work sche
 
 Simply login and you have access to:
 
-<p align="center">Submit availability
+<p align="center">Submit availability<br>
 <br><img src= "public/images/avail.png" width = "400"></p>
 
-<p align="center">View you and your team's availability 
+<p align="center">View you and your team's availability<br>
 <br><img src= "public/images/schedule.png"></p>
 
-<p align="center">Request off
+<p align="center">Request off<br>
 <br><img src= "public/images/requestoff.png" width = "400"></p>
 
 ### Don't have an account? 
@@ -24,7 +24,7 @@ Just click Sign Up and you can create an account.
 
 Mobile friendly and you will *always be on time!*
 
-Check it out here:
+Check it out here: 
 
 ## Technologies used
 
@@ -42,7 +42,7 @@ Check it out here:
 * MySQL
 * Sequalize
 
-See our presentation here: 
+Here is our presentation this project and learn of possible future developments: https://docs.google.com/presentation/d/1V575YpgOxrLqJHyG1Bb-LuMvrE7aMmrmb8zwXNq5Tto/edit?usp=sharing
 
 ## Contributors:
 Hallie Weintraub https://github.com/hallieraew <br>
