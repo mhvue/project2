@@ -5,47 +5,44 @@ module.exports = function(app) {
   app.get("/", function(req, res) { 
     //will have Login as the default 
     // res.redirect("/signin");
-    res.sendFile(path.join(__dirname, "../views/index.html"));
+    res.sendFile(path.join(__dirname, "../public/index.html"));
   });
 
   app.get("/signup", function(req, res) {
-    res.sendFile(path.join(__dirname, "../views/signup.html"));
+    res.sendFile(path.join(__dirname, "../public/signup.html"));
    });
 
    app.get("/signin", function(req, res) { //was index here
-    // res.sendFile(path.join(__dirname, "../views/index.html"));
-     //this needs to be changes to login.html so user can log in
-    res.sendFile(path.join(__dirname, "../views/login.html"));
+    res.sendFile(path.join(__dirname, "../public/login.html"));
 
    });
 
   //onced LOGGED IN, see schedule page AGE W/ HOME OR INDEX 
   app.get("/loggedin", function(req, res) { //was index here
-   res.sendFile(path.join(__dirname, "../views/schedulePage.html"));
+   res.sendFile(path.join(__dirname, "../public/schedulePage.html"));
   
   });
 
   // SCHEDULE PAGE = display the schedule page of current schedule 
-  // app.get("/schedule", function(req, res) {
-  //   res.sendFile(path.join(__dirname, "../views/schedulePage.html")); //this will be displayed
-  // });
+  app.get("/schedule", isLoggedIn, function(req, res) {
+    res.sendFile(path.join(__dirname, "../public/schedulePage.html"));
+  });
 
 
   //availability
-  app.get("/avail", function(req,res){ 
-    res.sendFile(path.join(__dirname, "../views/avail.html")); 
+  app.get("/avail", isLoggedIn, function(req,res){ 
+    res.sendFile(path.join(__dirname, "../public/avail.html")); 
   });
 
 
   //REQUEST OFF page  and //model shows the request was sent instead of seperate page 
-  app.get("/requestoff", function(req,res){ 
-    res.sendFile(path.join(__dirname, "../views/requestOff.html")); 
+  app.get("/requestoff", isLoggedIn, function(req,res){ 
+    res.sendFile(path.join(__dirname, "../public/requestOff.html")); 
   });
 
    //user LOGS OUT Page = this is the page that shows when user logs out
   app.get("/logout", function(req,res) {
-    // res.sendFile(path.join(__dirname, "../views/logOut.html")); 
-    // OR go back to home page 
+
     res.redirect("/");
 
   });
@@ -54,4 +51,12 @@ module.exports = function(app) {
   app.get("*", function(req, res) {
     res.status(404).send("Unable to find. Try again")
     });
+
+    function isLoggedIn(req, res, next) {
+ 
+      if (req.isAuthenticated())
+          return next();
+      res.redirect("/signin");
+
+  }
 };

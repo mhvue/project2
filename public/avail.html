@@ -6,45 +6,49 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>ABOT | Submit Availability</title>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"
+        integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6"
+        crossorigin="anonymous"></script>
+
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
         integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
     <link href="https://fonts.googleapis.com/css?family=Homemade+Apple|Open+Sans+Condensed:300&display=swap"
         rel="stylesheet">
-    <link rel="stylesheet" href="./assets/style.css">
-    <script src="https://code.jquery.com/jquery.js"></script>
+    <link rel="stylesheet" href="./styles/styles.css">
+
 </head>
 
 <body>
     <nav class="navbar navbar-light bg-light">
-        <a class="navbar-brand" href="./index.html">
-            <img src="/docs/4.4/assets/brand/bootstrap-solid.svg" width="30" height="30"
-                class="d-inline-block align-top" alt="ABOT Logo">
-            Request time off.
-        </a>
-        <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
-            <li class="nav-item">
-                <a class="nav-link" href="./index.html">Home</a>
-            </li>
+        <img src="./styles/images/Logo.png" class="d-inline-block align-top" alt="ABOT Logo">
+
+        <ul class="navbar-nav mx-auto mt-2 mt-lg-0">
             <li class="nav-item">
                 <a class="nav-link" href="./schedulePage.html">View Schedule</a>
             </li>
             <li class="nav-item">
                 <a class="nav-link" href="./requestOff.html">Request Time Off</a>
             </li>
+            <li class="nav-item">
+                <a class="nav-link" id="logout" name="logout" href="/auth/logout" method="get" action="logout">Logout</a>
+            </li>
         </ul>
     </nav>
-    <div class="surveyBody">
 
+    <div class="surveyBody p-5">
         <form name="submitAvail">
+            <h1>Submit availability</h1>
+            <br>
+            <br>
             <div class="form-group">
                 <label for="exampleFormControlInput1">First Name (required)</label>
-                <input name="firstName" class="requiredFirst form-control" id="firstName"
-                    placeholder="First Name">
+                <input name="firstName" class="requiredFirst form-control" id="firstName" placeholder="First Name">
             </div>
             <div class="form-group">
                 <label for="exampleFormControlInput1">Last Name (required)</label>
-                <input name="lastName" class="requiredLast form-control" id="lastName"
-                    placeholder="Last Name">
+                <input name="lastName" class="requiredLast form-control" id="lastName" placeholder="Last Name">
             </div>
             <div class="form-group">
                 <label for="Date">Please choose a date from the options below. If the date you need is not an option,
@@ -79,10 +83,48 @@
                 </select>
             </div>
         </form>
-        <a href="./index.html" id="submitRequest" class="btn btn-primary btn-lg">
+        <br>
+        <a href="./index.html" id="submitRequest" class="btn btn-dark btn-md">
             <span class="fa fa-th-list"></span> Submit</a>
     </div>
     </div>
+
+    <div class="modal fade" id="successModal" role="dialog">
+        <div class="modal-dialog">
+            <!-- Modal content-->
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4 class="modal-title">Submission Success!</h4>
+                </div>
+                <div class="modal-body">
+                    <p>Your availability has successfully been submitted. If for any reason you are no longer able to
+                        fulfill this shift, please reach out to your manager as soon as possible.</p>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-dark" data-dismiss="modal">Close.</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal fade" id="errModal" role="dialog">
+        <div class="modal-dialog">
+            <!-- Modal content-->
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4 class="modal-title">Submission Failed!</h4>
+                </div>
+                <div class="modal-body">
+                    <p>There has been an issue submitting your availability. Please try again or contact your manager
+                        directly.</p>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-dark" data-dismiss="modal">Try again.</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
 </body>
 
 <script type="text/javascript">
@@ -111,21 +153,22 @@
         };
         validateForm();
 
-        console.log(newAvail);
-
-
         $.post("/api/avail", newAvail,
             function (data) {
 
+                if (data) {
 
-                $("#firstName").val("");
-                $("#lastName").val("");
-                $("#date").val("");
-                $("#startTime").val("");
-                $("#endTime").val("");
+                    $("#successModal").modal('show');
 
+                    $("#firstName").val("");
+                    $("#lastName").val("");
+                    $("#date").val("");
+                    $("#startTime").val("");
+                    $("#endTime").val("");
+                } else {
+                    $("#errModal").modal('show');
+                }
             });
-
     });
 
 

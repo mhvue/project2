@@ -1,25 +1,23 @@
 {
   "development": {
     "username": "root",
-    "password": "124Cloud",
+    "password": "home4567",
     "database": "abot_db",
     "host": "localhost",
     "dialect": "mysql",
-     "port": "3307"
+     "port": "3306"
   },
   "test": {
     "username": "root",
-    "password": "124Cloud",
+    "password": "home4567",
     "database": "abot_db",
     "host": "localhost",
     "dialect": "mysql",
     "logging": false
   },
   "production": {
-    "username": "root",
-    "password": null,
-    "database": "database_production",
-    "host": "127.0.0.1",
+
+    "use_env_variable": "JAWSDB_URL",
     "dialect": "mysql"
   }
 }

@@ -1,7 +1,3 @@
- //starting code for authController 
-
-// Talked with Kathy - we want to set this up like an object with each function a method inside - this is what sarah was trying to get at with the objects on Wed =
-
 module.exports = {
 
     signup: function(req, res) {

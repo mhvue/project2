@@ -3,8 +3,8 @@ var db = require("../models");
 module.exports = function (app) {
     // Get all examples
     app.get("/api/schedule", function (req, res) { //this is to display the full work schedule currently
-        db.Schedule.findAll({}).then(function (dbSchedule) {
-            res.json(dbSchedule);
+        db.schedule.findAll({}).then(function (dbschedule) {
+            res.json(dbschedule);
         });
     });
 
@@ -36,9 +36,9 @@ module.exports = function (app) {
         });
     });
 
-//   // Delete a request off by id 
+  // Delete a request off by id -- not implemented
   app.delete("/api/requestoff/:id", function(req, res) {
     db.Schedule.destroy({ where: { id: req.params.id } }).then(function(dbSchedule) {
       res.json(dbSchedule);
-    })})}
+    })})};
 
