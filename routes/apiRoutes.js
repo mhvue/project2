@@ -44,6 +44,5 @@ module.exports = function (app) {
       res.json(dbSchedule);
     })})
 
-  //future-add: the option to view only that specfic's user's avail schedule 
 };
 

@@ -15,7 +15,7 @@ module.exports = function (passport, user) {
                 var generateHash = function(password) {
                     return bCrypt.hashSync(password, 8 , null);
                 };
-                console.log("meeeeee");
+               
 
                 UserDB.user.findOne({
                     where: {
@@ -37,7 +37,6 @@ module.exports = function (passport, user) {
                         };
 
                         UserDB.user.create(data).then(function(newUser){
-                            console.log(newUser);
                             if(!newUser){
                                 return done(null, false);
                             }
@@ -46,7 +45,7 @@ module.exports = function (passport, user) {
                             }
                         });
                     }
-                    console.log("created: " + data);
+                   
                 });
             }
         ));
