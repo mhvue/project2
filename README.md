@@ -42,7 +42,7 @@ Check it out here:
 * MySQL
 * Sequalize
 
-Here is our presentation this project and learn of possible future developments: https://docs.google.com/presentation/d/1V575YpgOxrLqJHyG1Bb-LuMvrE7aMmrmb8zwXNq5Tto/edit?usp=sharing
+Learn about our motivation and possible future developments: https://docs.google.com/presentation/d/1V575YpgOxrLqJHyG1Bb-LuMvrE7aMmrmb8zwXNq5Tto/edit?usp=sharing
 
 ## Contributors:
 Hallie Weintraub https://github.com/hallieraew <br>
