@@ -1,24 +1,92 @@
 <!DOCTYPE html>
-<html>
- 
+<html lang="en">
+
 <head>
     <title>Sign Up</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <script src="https://kit.fontawesome.com/9cf5b93a1e.js" crossorigin="anonymous"></script>
+    <!--===============================================================================================-->
+    <link rel="icon" type="image/png" href="../public/styles/images/favicon.ico" />
+    <!--===============================================================================================-->
+    <link rel="stylesheet" type="text/css" href="vendor/bootstrap/css/bootstrap.min.css">
+
+    <!--===============================================================================================-->
+    <link rel="stylesheet" type="text/css" href="/public/styles/Icon/material-design-iconic-font.min.csss">
+    <!--===============================================================================================-->
+    <link rel="stylesheet" type="text/css" href="../public/styles/login.css">
+    <!--===============================================================================================-->
+    <script src="vendor/jquery/jquery-3.2.1.min.js"></script>
+    <script src="../public/js/login.js"></script>
 </head>
- 
+
 <body>
-    <h1>Sign Up</h1>
-    <form id="signup" name="signup" method="post" action="/auth/signup">
-        <label for="email">Email Address</label>
-        <input class="text" name="email" type="email" />
-        <label for="firstname">Firstname</label>
-        <input name="firstname" type="text" />
-        <label for="lastname">Lastname</label>
-        <input name="lastname" type="text" />
-        <label for="password">Password</label>
-        <input name="password" type="password" />
-        <input class="btn" type="submit" value="Sign Up" />
-    </form>
- 
+    <div class="limiter">
+        <div class="container-login100" style="background-image: url(public\styles\images\marble.jpg);">
+            <div class="wrap-login100">
+                <form class="login100-form validate-form" name="signin">
+                    <span class="login100-form-logo">
+                        <i class="fas fa-hourglass-half"></i>
+                    </span>
+
+                    <span class="login100-form-title p-b-34 p-t-27">
+                        Sign Up
+                    </span>
+                    <form id="signup" name="signup" method="post" action="/auth/signup">
+
+                        <div class="wrap-input100 validate-input" data-validate="Enter name">
+                            <input class="input100 text" type="text" name="firstname" placeholder="First name">
+                            <span class="focus-input100">
+                                <i class="fas fa-user" style="color:antiquewhite"></i>
+                            </span>
+                        </div>
+                        <div class="wrap-input100 validate-input" data-validate="Enter name">
+                            <input class="input100 text" type="text" name="lastname" placeholder="Last name">
+                            <span class="focus-input100">
+                                <i class="fas fa-user" style="color:antiquewhite"></i>
+                            </span>
+                        </div>
+                        <div class="wrap-input100 validate-input" data-validate="Enter email">
+                            <input class="input100 text" type="email" name="email" placeholder="Email">
+                            <span class="focus-input100">
+                                <i class="fas fa-user" style="color:antiquewhite"></i>
+                            </span>
+                        </div>
+
+                        <div class="wrap-input100 validate-input" data-validate="Enter password">
+                            <input class="input100" type="password" name="pass" placeholder="Password">
+                            <span class="focus-input100">
+                                <i class="fas fa-lock" style="color:antiquewhite"></i>
+                            </span>
+                        </div>
+
+                        <div class="wrap-input100 validate-input" data-validate="Select Title">
+                            <div class="input100" type="Title" name="Title" placeholder="Title">
+                                <span class="focus-input100">
+                                    <i class="fas fa-user-friends"></i>
+                                </span>
+                                <select id="title" name="title">
+                                    <option value="Manager">Manager</option>
+                                    <option value="Employee">Employee</option>
+                                </select>
+
+                            </div>
+                        </div>
+
+                        <div class="container-login100-form-btn">
+                            <button class="login100-form-btn">
+                                Login
+                            </button>
+                        </div>
+                        </a>
+            </div>
+            </form>
+        </div>
+    </div>
+    </div>
+
+    <div id="dropDownSelect1"></div>
 </body>
- 
+
 </html>
