@@ -4,7 +4,8 @@ module.exports = function(app) {
   // 1st page to Load index login 
   app.get("/", function(req, res) { 
     //will have Login as the default 
-    res.redirect("/signin");
+    // res.redirect("/signin");
+    res.sendFile(path.join(__dirname, "../public/index.html"));
   });
 
   app.get("/signup", function(req, res) {
@@ -16,9 +17,9 @@ module.exports = function(app) {
 
    });
 
-  //LOGIN  PAGE W/ HOME OR INDEX 
+  //onced LOGGED IN, see schedule page AGE W/ HOME OR INDEX 
   app.get("/loggedin", function(req, res) { //was index here
-   res.sendFile(path.join(__dirname, "../public/loggedIn.html"));
+   res.sendFile(path.join(__dirname, "../public/schedulePage.html"));
   
   });
 
@@ -41,9 +42,8 @@ module.exports = function(app) {
 
    //user LOGS OUT Page = this is the page that shows when user logs out
   app.get("/logout", function(req,res) {
-    // res.sendFile(path.join(__dirname, "../public/logOut.html")); 
-    // OR go back to home page 
-    res.redirect("/signin");
+
+    res.redirect("/");
 
   });
 
