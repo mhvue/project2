@@ -58,25 +58,22 @@ module.exports = function (passport, user) {
             passwordField: "password",
             passReqToCallback: true
         },
-        function (email, password, done) {
+        function (req, email, password, done) {
             console.log(".here")
-            var validPassword = bCrypt.compareSync(password, user.password);
-
-
+    
             UserDB.user.findOne({
                 where: {
                     email: email
                 }
             }).then(function (user, err) {
                 console.log(user);
-                console.log(err);
 
                 if (!user) {
                     return done(null, false, {
                         message: "Email does not exist."
                     });
                 }
-
+                var validPassword = bCrypt.compareSync(password, user.password);
                 console.log(validPassword);
 
                 if (!validPassword) {
@@ -92,7 +89,6 @@ module.exports = function (passport, user) {
                 return done(null, userInfo);
 
             }).catch(function (err) {
-                console.log("error:" + err);
                 return done(null, false, {
                     message: "Sorry! Something weng wrong with your sign in."
                 });
