@@ -24,19 +24,19 @@ module.exports = function(app) {
   });
 
   // SCHEDULE PAGE = display the schedule page of current schedule 
-  app.get("/schedule", function(req, res) {
+  app.get("/schedule", isLoggedIn, function(req, res) {
     res.sendFile(path.join(__dirname, "../public/schedulePage.html"));
   });
 
 
   //availability
-  app.get("/avail", function(req,res){ 
+  app.get("/avail", isLoggedIn, function(req,res){ 
     res.sendFile(path.join(__dirname, "../public/avail.html")); 
   });
 
 
   //REQUEST OFF page  and //model shows the request was sent instead of seperate page 
-  app.get("/requestoff", function(req,res){ 
+  app.get("/requestoff", isLoggedIn, function(req,res){ 
     res.sendFile(path.join(__dirname, "../public/requestOff.html")); 
   });
 
@@ -51,4 +51,12 @@ module.exports = function(app) {
   app.get("*", function(req, res) {
     res.status(404).send("Unable to find. Try again")
     });
+
+    function isLoggedIn(req, res, next) {
+ 
+      if (req.isAuthenticated())
+          return next();
+      res.redirect("/signin");
+
+  }
 };

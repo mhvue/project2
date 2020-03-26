@@ -23,11 +23,7 @@ module.exports = function (app){
     app.post("/auth/signin", passport.authenticate("signin",{
             successRedirect: "/loggedin",
             failureRedirect: "/signin"})
-            
-        
     );
-
-
 
  
     function isLoggedIn(req, res, next) {
