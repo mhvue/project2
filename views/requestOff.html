@@ -93,12 +93,6 @@
                     </button>
                 </div>
                 <div class="modal-body">
-                    <h2>hello</h2>
-                    <p id= "firstName" ></p>
-                    <p id="lastName"></p> 
-                    <p id="date"></p> 
-                    <p id="startTime"></p> 
-                    <p id="endTime"></p> 
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Submit another
@@ -136,33 +130,30 @@
             endTime: $("#endTime").val().trim()
         };
         if (validateForm()) {
-            console.log(newRequest);
-            $.post("/api/requestoff", newRequest,function (data) {
-                console.log(data);
-                    // if (data ) {
-                       
-                        $("#firstName").text(data.firstname)
-                        $("#lastName").text(data.lastname)
-                        $("#date").text(data.date)
-                        $("#startTime").text(data.startTime)
-                        $("#endTime").text(data.endTime)
-                        $("#myModal").modal("toggle");
-                    // } 
-                    // if()
-                    //     else {
-                    //     alert("try again");
-                        
-        //     }
 
-        // else{
-        //     console.log("uhoh")
-        // }
 
-                });
-    }
+console.log(newRequest);
+
+
+$.post("/api/requestoff", newRequest,
+    function (data) {
+
+        if (data) {
+
+            $("#firstName").val("");
+            $("#lastName").val("");
+            $("#date").val("");
+            $("#startTime").val("");
+            $("#endTime").val("");
+
+        } else {
+            alert("try again")
+        }
+
+    });
+};
+
 });
-//     );
-// });
 
 
 </script>
