@@ -1,5 +1,5 @@
-# Always. Be. On. Time
-User friendly and easy peasy scheduler at your convenience
+# Always. Be. On. Time.
+User friendly scheduler at your convenience. Stay up to date with your work schedule, your time off requests and your team's work schedule. 
 
 <p align="center">
 <br><img src= "public/images/ABOT.indexImg.png"></p>
@@ -8,13 +8,13 @@ User friendly and easy peasy scheduler at your convenience
 
 Simply login and you have access to:
 
-<p align="center">Add availability
+<p align="center">Submit availability
 <br><img src= "public/images/avail.png" width = "400"></p>
 
-<p align="center">View your availability 
+<p align="center">View you and your team's availability 
 <br><img src= "public/images/schedule.png"></p>
 
-<p align="center">Request time off
+<p align="center">Request off
 <br><img src= "public/images/requestoff.png" width = "400"></p>
 
 ### Don't have an account? 
@@ -22,9 +22,9 @@ Just click Sign Up and you can create an account.
 <p align="center">
 <br><img src= "public/images/signUp.png" width = "400"></p>
 
-It's mobile friendly so take with you on go and you will *always be on time!*
+Mobile friendly and you will *always be on time!*
 
-Check it out here: _link here_
+Check it out here:
 
 ## Technologies used
 
@@ -42,6 +42,7 @@ Check it out here: _link here_
 * MySQL
 * Sequalize
 
+See our presentation here: 
 
 ## Contributors:
 Hallie Weintraub https://github.com/hallieraew <br>
