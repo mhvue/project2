@@ -4,7 +4,8 @@ module.exports = function(app) {
   // 1st page to Load index login 
   app.get("/", function(req, res) { 
     //will have Login as the default 
-    res.redirect("/signin");
+    // res.redirect("/signin");
+    res.sendFile(path.join(__dirname, "../views/index.html"));
   });
 
   app.get("/signup", function(req, res) {
@@ -12,20 +13,22 @@ module.exports = function(app) {
    });
 
    app.get("/signin", function(req, res) { //was index here
-    res.sendFile(path.join(__dirname, "../views/index.html"));
+    // res.sendFile(path.join(__dirname, "../views/index.html"));
+     //this needs to be changes to login.html so user can log in
+    res.sendFile(path.join(__dirname, "../views/login.html"));
 
    });
 
-  //LOGIN  PAGE W/ HOME OR INDEX 
+  //onced LOGGED IN, see schedule page AGE W/ HOME OR INDEX 
   app.get("/loggedin", function(req, res) { //was index here
-   res.sendFile(path.join(__dirname, "../views/loggedIn.html"));
+   res.sendFile(path.join(__dirname, "../views/schedulePage.html"));
   
   });
 
   // SCHEDULE PAGE = display the schedule page of current schedule 
-  app.get("/schedule", function(req, res) {
-    res.sendFile(path.join(__dirname, "../views/schedulePage.html"));
-  });
+  // app.get("/schedule", function(req, res) {
+  //   res.sendFile(path.join(__dirname, "../views/schedulePage.html")); //this will be displayed
+  // });
 
 
   //availability
@@ -43,7 +46,7 @@ module.exports = function(app) {
   app.get("/logout", function(req,res) {
     // res.sendFile(path.join(__dirname, "../views/logOut.html")); 
     // OR go back to home page 
-    res.redirect("/signin");
+    res.redirect("/");
 
   });
 
