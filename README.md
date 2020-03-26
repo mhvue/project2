@@ -26,8 +26,8 @@ It's mobile friendly so take with you on go and you will *always be on time!*
 
 Check it out here: _link here_
 
-## Technologies used: 
-This application is build with:
+## Technologies used
+
 ### Front End 
 * HTML
 * CSS
@@ -44,8 +44,8 @@ This application is build with:
 
 
 ## Contributors:
-Hallie Weintraub https://github.com/hallieraew 
-Alicia Forstner https://github.com/forsa9828
+Hallie Weintraub https://github.com/hallieraew <br>
+Alicia Forstner https://github.com/forsa9828<br>
 Mai Houa Vue https://github.com/mhvue 
 
 
