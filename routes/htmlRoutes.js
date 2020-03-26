@@ -12,7 +12,7 @@ module.exports = function(app) {
    });
 
    app.get("/signin", function(req, res) { //was index here
-    res.sendFile(path.join(__dirname, "../public/index.html"));
+    res.sendFile(path.join(__dirname, "../public/login.html"));
 
    });
 

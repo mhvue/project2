@@ -36,7 +36,7 @@ module.exports = function (app) {
         });
     });
 
-//   // Delete a request off by id 
+//   // Delete a request off by id -- not implemented
   app.delete("/api/requestoff/:id", function(req, res) {
     db.Schedule.destroy({ where: { id: req.params.id } }).then(function(dbSchedule) {
       res.json(dbSchedule);
