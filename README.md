@@ -29,12 +29,13 @@ In this application, we are using Passport to check users's email and password f
 
 Passport.use() must be configured first by setting _stratagies_ that will tell passport how to validate user's information when a user is signing back in or a user is signing up. 
 
-When new users are signing up, Passport will check the database (in this application we use Sequalize ORM methods) and if not already in database, with bCrypt, created passwords are then hashed for security purposes. 
+When new users are signing up, Passport will check the database (in this application we use Sequalize ORM methods) and if not already in database, with bCrypt, create passwords are then hashed for security purposes. 
 
-Passport allows users to gain access to pages that only a registered user can see (such as requesting time off). 
+If authentication with Passport is successful, users gain access to pages that only a registered user can see (such as requesting time off). 
 
 
-Check it out here: https://mighty-wildwood-15788.herokuapp.com  
+Check it out here:<br>
+ https://mighty-wildwood-15788.herokuapp.com  
 
 
 ## How to get started: 
