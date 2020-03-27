@@ -96,8 +96,8 @@
         $(document).ready(function() {
 
             function validateForm() {
-                var first = document.forms["signin"]["firstname"].value;
-                var last = document.forms["signin"]["lastname"].value;
+                var first = document.forms["signup"]["firstname"].value;
+                var last = document.forms["signup"]["lastname"].value;
                 if (first == "") {
                     $(".requiredFirst").after("Please fill out required name field.");
                     return false;
