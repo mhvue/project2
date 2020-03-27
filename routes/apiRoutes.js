@@ -9,9 +9,16 @@ module.exports = function(app) {
         }).then(function(dbschedule) {
             res.json(dbschedule);
         });
-
     });
 
+    // show the data submitted in the below post that exists in current db
+    app.get("/api/requestoff", function(req, res) {
+        db.pto.findAll({
+            order: [sequelize.col('date')]
+        }).then(function(dbpto) {
+            res.json(dbpto);
+        });
+    });
 
     // Create a request off 
     app.post("/api/requestoff", function(req, res) { //this is to be able to add the request off
