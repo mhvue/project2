@@ -9,7 +9,9 @@ module.exports = function (app) {
         }).then(function (dbschedule) {
             res.json(dbschedule);
         });
+    
     });
+
 
     // Create a request off 
     app.post("/api/requestoff", function (req, res) { //this is to be able to add the request off
@@ -43,5 +45,7 @@ module.exports = function (app) {
   app.delete("/api/requestoff/:id", function(req, res) {
     db.Schedule.destroy({ where: { id: req.params.id } }).then(function(dbSchedule) {
       res.json(dbSchedule);
-    })})};
+    })})
+
+};
 

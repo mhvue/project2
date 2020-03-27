@@ -14,7 +14,6 @@ module.exports = function(passport, user) {
             var generateHash = function(password) {
                 return bCrypt.hashSync(password, 8, null);
             };
-            console.log("meeeeee");
 
             UserDB.user.findOne({
                 where: {
@@ -35,7 +34,6 @@ module.exports = function(passport, user) {
                     };
 
                     UserDB.user.create(data).then(function(newUser) {
-                        console.log(newUser);
                         if (!newUser) {
                             return done(null, false);
                         }
@@ -44,7 +42,6 @@ module.exports = function(passport, user) {
                         }
                     });
                 }
-                console.log("created: " + data);
             });
         }
     ));
@@ -56,14 +53,12 @@ module.exports = function(passport, user) {
             passReqToCallback: true
         },
         function(req, email, password, done) {
-            console.log(".here")
 
             UserDB.user.findOne({
                 where: {
                     email: email
                 }
             }).then(function(user, err) {
-                console.log(user);
 
                 if (!user) {
                     return done(null, false, {
@@ -71,15 +66,12 @@ module.exports = function(passport, user) {
                     });
                 }
                 var validPassword = bCrypt.compareSync(password, user.password);
-                console.log(validPassword);
 
                 if (!validPassword) {
                     return done(null, false, {
                         message: "Incorrect Password."
                     });
                 }
-
-                console.log("DOJO: " + user.password, "typed in:" + password);
 
                 var userInfo = user.get();
                 console.log(userInfo);
@@ -94,8 +86,6 @@ module.exports = function(passport, user) {
 
         }
     ));
-
-
 
     passport.serializeUser(function(user, done) {
         done(null, user.id);
