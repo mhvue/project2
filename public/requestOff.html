@@ -8,16 +8,12 @@
     <title>ABOT | Request Off Form</title>
 
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"
-        integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6"
-        crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.24.0/moment.min.js"></script>
 
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
-        integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
-    <link href="https://fonts.googleapis.com/css?family=Homemade+Apple|Open+Sans+Condensed:300&display=swap"
-        rel="stylesheet">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+    <link href="https://fonts.googleapis.com/css?family=Homemade+Apple|Open+Sans+Condensed:300&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="./styles/styles.css">
 </head>
 
@@ -33,8 +29,7 @@
                 <a class="nav-link" href="./avail.html">Submit Availability</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" id="logout" name="logout" href="/auth/logout" method="get"
-                    action="logout">Logout</a>
+                <a class="nav-link" id="logout" name="logout" href="/auth/logout" method="get" action="logout">Logout</a>
             </li>
         </ul>
     </nav>
@@ -82,8 +77,7 @@
             </div>
         </form>
         <br>
-        <a href="./index.html" id="submitRequest" data-toggle="modal" data-target="#myModal"
-            class="btn btn-dark btn-md">
+        <a href="./index.html" id="submitRequest" data-toggle="modal" data-target="#myModal" class="btn btn-dark btn-md">
             <span class="fa fa-th-list"></span> Submit</a>
     </div>
     </div>
@@ -96,11 +90,10 @@
                     <h4 class="modal-title">Request Success!</h4>
                 </div>
                 <div class="modal-body">
-                    <p>Your request has successfully been submitted. Please check in with your manager on approval,
-                        questions or concerns.</p>
+                    <p>Your request has successfully been submitted. Please check in with your manager on approval, questions or concerns.</p>
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-dark" data-dismiss="modal">Close.</button>
+                    <button type="button" class="btn btn-dark" data-dismiss="modal">Close</button>
                 </div>
             </div>
         </div>
@@ -114,18 +107,18 @@
                     <h4 class="modal-title">Request Failed!</h4>
                 </div>
                 <div class="modal-body">
-                    <p>There has been an issue submitting your request. Please try again or contact your manager
-                        directly.</p>
+                    <p>There has been an issue submitting your request. Please return to the form to ensure all fields are properly filled out. If you are still unable to submit please contact your manager directly.
+                    </p>
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-dark" data-dismiss="modal">Try again.</button>
+                    <button type="button" class="btn btn-dark" data-dismiss="modal">Try again</button>
                 </div>
             </div>
         </div>
     </div>
 
 </body>
-<script>
+<script type="text/javascript">
     moment().format();
 
     var dates = {
@@ -148,52 +141,51 @@
         $("<option>").text(dates.seventhDate),
     );
 
-    $(document).ready(function () {
+    $("#submitRequest").click(function(event) {
+        event.preventDefault();
 
-        function validateForm() {
-            var x = document.forms["requestOff"]["firstName"].value;
-            var y = document.forms["requestOff"]["lastName"].value;
-            if (x == "") {
-                $(".requiredFirst").after("Please fill out required name field.");
-                return false;
-            } else if (y == "") {
-                $(".requiredLast").after("Please fill out required name field.");
-                return false;
-            } return true;
+        var firstName = $("#firstName").val().trim();
+        var lastName = $("#lastName").val().trim();
+
+        function capName(str) {
+            return str.charAt(0).toUpperCase() + str.slice(1);
         };
 
-        $("#submitRequest").click(function (event) {
-            event.preventDefault();
+        var newRequest = {
+            firstName: capName(firstName),
+            lastName: capName(lastName),
+            date: $("#date").val().trim(),
+            startTime: $("#startTime").val().trim(),
+            endTime: $("#endTime").val().trim()
+        };
 
-            var newRequest = {
-                firstname: $("#firstName").val().trim(),
-                lastname: $("#lastName").val().trim(),
-                date: $("#date").val().trim(),
-                startTime: $("#startTime").val().trim(),
-                endTime: $("#endTime").val().trim()
-            };
-            if (validateForm()) {
+        if (newRequest.firstName == "") {
+            $("#errModal").modal('show');
+            return false;
+        } else if (newRequest.lastName == "") {
+            $("#errModal").modal('show');
+            return false;
+        } else {
 
-                $.post("/api/requestoff", newRequest,
-                    function (data) {
+            $.post("/api/requestoff", newRequest,
+                function(data) {
 
-                        if (data) {
-                            $("#successModal").modal('show');
+                    if (data) {
 
-                            $("#firstName").val("");
-                            $("#lastName").val("");
-                            $("#date").val("");
-                            $("#startTime").val("");
-                            $("#endTime").val("");
+                        $("#successModal").modal('show');
 
-                        } else {
-                            $("#errModal").modal('show');
-                        }
-                    });
-            };
-        });
+                        $("#firstName").val("");
+                        $("#lastName").val("");
+                        $("#date").val("");
+                        $("#startTime").val("");
+                        $("#endTime").val("");
+
+                    } else {
+                        $("#errModal").modal('show');
+                    }
+                });
+        }
     });
-
 </script>
 
 </html>

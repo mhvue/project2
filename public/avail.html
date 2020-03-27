@@ -8,16 +8,12 @@
     <title>ABOT | Submit Availability</title>
 
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"
-        integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6"
-        crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.24.0/moment.min.js"></script>
 
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
-        integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
-    <link href="https://fonts.googleapis.com/css?family=Homemade+Apple|Open+Sans+Condensed:300&display=swap"
-        rel="stylesheet">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+    <link href="https://fonts.googleapis.com/css?family=Homemade+Apple|Open+Sans+Condensed:300&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="./styles/styles.css">
 
 </head>
@@ -34,8 +30,7 @@
                 <a class="nav-link" href="./requestOff.html">Request Time Off</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" id="logout" name="logout" href="/auth/logout" method="get"
-                    action="logout">Logout</a>
+                <a class="nav-link" id="logout" name="logout" href="/auth/logout" method="get" action="logout">Logout</a>
             </li>
         </ul>
     </nav>
@@ -95,11 +90,10 @@
                     <h4 class="modal-title">Submission Success!</h4>
                 </div>
                 <div class="modal-body">
-                    <p>Your availability has successfully been submitted. If for any reason you are no longer able to
-                        fulfill this shift, please reach out to your manager as soon as possible.</p>
+                    <p>Your availability has successfully been submitted. If for any reason you are no longer able to fulfill this shift, please reach out to your manager as soon as possible.</p>
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-dark" data-dismiss="modal">Close.</button>
+                    <button type="button" class="btn btn-dark" data-dismiss="modal">Close</button>
                 </div>
             </div>
         </div>
@@ -113,11 +107,11 @@
                     <h4 class="modal-title">Submission Failed!</h4>
                 </div>
                 <div class="modal-body">
-                    <p>There has been an issue submitting your availability. Please try again or contact your manager
-                        directly.</p>
+                    <p>There has been an issue submitting your availability. Please return to the form to ensure all fields are properly filled out. If you are still unable to submit please contact your manager directly.
+                    </p>
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-dark" data-dismiss="modal">Try again.</button>
+                    <button type="button" class="btn btn-dark" data-dismiss="modal">Try again</button>
                 </div>
             </div>
         </div>
@@ -126,7 +120,6 @@
 </body>
 
 <script type="text/javascript">
-
     moment().format();
 
     var dates = {
@@ -149,50 +142,51 @@
         $("<option>").text(dates.seventhDate),
     );
 
-    function validateForm() {
-        var x = document.forms["submitAvail"]["firstName"].value;
-        var y = document.forms["submitAvail"]["lastName"].value;
-        if (x == "") {
-            $(".requiredFirst").after("Please fill out required name field.");
-            return false;
-        } else if (y == "") {
-            $(".requiredLast").after("Please fill out required name field.");
-            return false;
-        } return true;
-    };
-
-    $("#submitRequest").click(function (event) {
+    $("#submitRequest").click(function(event) {
         event.preventDefault();
 
+        var firstName = $("#firstName").val().trim();
+        var lastName = $("#lastName").val().trim();
+
+        function capName(str) {
+            return str.charAt(0).toUpperCase() + str.slice(1);
+        };
+
         var newAvail = {
-            firstName: $("#firstName").val().trim(),
-            lastName: $("#lastName").val().trim(),
+            firstName: capName(firstName),
+            lastName: capName(lastName),
             date: $("#date").val().trim(),
             startTime: $("#startTime").val().trim(),
             endTime: $("#endTime").val().trim()
         };
-        validateForm();
 
-        $.post("/api/avail", newAvail,
-            function (data) {
+        if (newAvail.firstName == "") {
+            $("#errModal").modal('show');
+            return false;
+        } else if (newAvail.lastName == "") {
+            $("#errModal").modal('show');
+            return false;
+        } else {
 
-                if (data) {
+            $.post("/api/avail", newAvail,
+                function(data) {
 
-                    $("#successModal").modal('show');
+                    if (data) {
 
-                    $("#firstName").val("");
-                    $("#lastName").val("");
-                    $("#date").val("");
-                    $("#startTime").val("");
-                    $("#endTime").val("");
-                } else {
-                    $("#errModal").modal('show');
-                }
-            });
+                        $("#successModal").modal('show');
+
+                        $("#firstName").val("");
+                        $("#lastName").val("");
+                        $("#date").val("");
+                        $("#startTime").val("");
+                        $("#endTime").val("");
+
+                    } else {
+                        $("#errModal").modal('show');
+                    }
+                });
+        }
     });
-
-
-
 </script>
 
 </html>
