@@ -11,7 +11,7 @@ Simply login and you have access to:
 <p align="center">Submit availability<br>
 <br><img src= "public/images/avail.png" width = "400"></p>
 
-<p align="center">View you and your team's availability<br>
+<p align="center">View you and your team's availability in ascending order of dates<br>
 <br><img src= "public/images/schedule.png"></p>
 
 <p align="center">Request off<br>
