@@ -2,82 +2,77 @@
 <html lang="en">
 
 <head>
-  <!-- Required meta tags -->
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
-  <title>ABOT</title>
-  <link rel="icon" href="./styles/images/hOURGLASS.png" />
+    <!-- Required meta tags -->
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+    <title>ABOT</title>
+    <link rel="icon" href="./styles/images/hOURGLASS.png" />
 
-  <!-- Bootstrap CSS -->
-  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
-    integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
-  <!-- style CSS -->
-  <link rel="stylesheet" href="./styles/styles.css" />
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.24.0/moment.min.js"></script>
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <!-- style CSS -->
+    <link rel="stylesheet" href="./styles/styles.css" />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.24.0/moment.min.js"></script>
 
-  <script src="https://code.jquery.com/jquery.js"></script>
-  <script src="../public/js/index.js"></script>
+    <script src="https://code.jquery.com/jquery.js"></script>
+    <script src="../public/js/index.js"></script>
 </head>
 
 <body>
-  <nav class="navbar navbar-light bg-light">
-    <img src="./styles/images/Logo.png" class="d-inline-block align-top" alt="ABOT Logo">
+    <nav class="navbar navbar-light bg-light">
+        <img src="./styles/images/Logo.png" class="d-inline-block align-top" alt="ABOT Logo">
 
-    <ul class="navbar-nav mx-auto mt-2 mt-lg-0">
-      <li class="nav-item">
-        <a class="nav-link" href="./requestOff.html ">Request Time Off</a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link" href="./avail.html">Submit Availability</a>
-      </li>
-      <li class="nav-item">
-          <a class="nav-link" id="logout" name="logout" href="/auth/logout" method="get" action="logout">Logout</a>
-      </li>
-    </ul>
-  </nav>
-  <br>
-  <div class="table-responsive">
-    <table class="table-bordered table-dark mx-auto">
-      <thead>
-        <tr>
-          <th scope="col" class="p-4 align-middle">First Name</th>
-          <th scope="col" class="p-4 align-middle">Last Name</th>
-          <th scope="col" class="p-4 align-middle">Date</th>
-          <th scope="col" class="p-4 align-middle">Start Time</th>
-          <th scope="col" class="p-4 align-middle">End Time</th>
-        </tr>
-      </thead>
-      <tbody id="schedule-data">
-      </tbody>
-    </table>
-  </div>
-  </div>
+        <ul class="navbar-nav mx-auto mt-2 mt-lg-0">
+            <li class="nav-item">
+                <a class="nav-link" href="./requestOff.html ">Request Time Off</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="./avail.html">Submit Availability</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" id="logout" name="logout" href="/auth/logout" method="get" action="logout">Logout</a>
+            </li>
+        </ul>
+    </nav>
+    <br>
+    <div class="table-responsive">
+        <table class="table-bordered table-dark mx-auto">
+            <thead>
+                <tr>
+                    <th scope="col" class="p-4 align-middle">First Name</th>
+                    <th scope="col" class="p-4 align-middle">Last Name</th>
+                    <th scope="col" class="p-4 align-middle">Date</th>
+                    <th scope="col" class="p-4 align-middle">Start Time</th>
+                    <th scope="col" class="p-4 align-middle">End Time</th>
+                </tr>
+            </thead>
+            <tbody id="schedule-data">
+            </tbody>
+        </table>
+    </div>
+    </div>
 
 </body>
 <script>
+    var getSchedule = function() {
 
-  var getSchedule = function () {
+        $.get("api/schedule", function(data) {
 
-    $.get("api/schedule", function (data) {
+            for (i = 0; i < data.length; i++) {
 
-      for (i = 0; i < data.length; i++) {
+                var newRow = $("<tr>").append(
+                    $("<td>").addClass("p-2 text-center align-middle").text(data[i].firstName),
+                    $("<td>").addClass("p-2 text-center align-middle").text(data[i].lastName),
+                    $("<td>").addClass("p-2 text-center align-middle").text(data[i].date),
+                    $("<td>").addClass("p-2 text-center align-middle").text(data[i].startTime),
+                    $("<td>").addClass("p-2 text-center align-middle").text(data[i].endTime),
+                );
 
-        var newRow = $("<tr>").append(
-          $("<td>").addClass("p-4 align-middle").text(data[i].firstName),
-          $("<td>").addClass("p-4 align-middle").text(data[i].lastName),
-          $("<td>").addClass("p-4 align-middle").text(data[i].date),
-          $("<td>").addClass("p-4 align-middle").text(data[i].startTime),
-          $("<td>").addClass("p-4 align-middle").text(data[i].endTime),
-        );
-
-        $("#schedule-data").append(newRow);
-      }
-    })
-  }
-
-  
-  getSchedule();
-
+                $("#schedule-data").append(newRow);
+            }
+        })
+    }
+    getSchedule();
 </script>
 
 </html>

@@ -3,69 +3,62 @@ var UserDB = require("../../models");
 var LocalStrategy = require("passport-local").Strategy;
 
 
-module.exports = function (passport, user) {
+module.exports = function(passport, user) {
     //SIGN-UP 
-      passport.use("local-signup", new LocalStrategy(
-            {
-                usernameField: "email",
-                passwordField: "password",
-                passReqToCallback: true
-            }, 
-            function(req, email, password, done){
-                var generateHash = function(password) {
-                    return bCrypt.hashSync(password, 8 , null);
-                };
-               
-
-                UserDB.user.findOne({
-                    where: {
-                        email: email
-                    }
-                }).then(function(user) {
-                    if (user) {
-                        return done(null, false, {
-                            message: "That email is already taken"
-                        });
-                    } else {
-                        var userPassword = generateHash(password);
-                        var data =
-                        {
-                            email: req.body.email,
-                            password: userPassword,
-                            firstname: req.body.firstname,
-                            lastname: req.body.lastname
-                        };
-
-                        UserDB.user.create(data).then(function(newUser){
-                            if(!newUser){
-                                return done(null, false);
-                            }
-                            if (newUser){
-                                return done(null, newUser);
-                            }
-                        });
-                    }
-                   
-                });
-            }
-        ));
-
-    // SIGN-IN for existing users
-    passport.use("signin", new LocalStrategy(
-        {
+    passport.use("local-signup", new LocalStrategy({
             usernameField: "email",
             passwordField: "password",
             passReqToCallback: true
         },
-        function (req, email, password, done) {
-            console.log(".here")
-    
+        function(req, email, password, done) {
+            var generateHash = function(password) {
+                return bCrypt.hashSync(password, 8, null);
+            };
+
             UserDB.user.findOne({
                 where: {
                     email: email
                 }
-            }).then(function (user, err) {
-                console.log(user);
+            }).then(function(user) {
+                if (user) {
+                    return done(null, false, {
+                        message: "That email is already taken."
+                    });
+                } else {
+                    var userPassword = generateHash(password);
+                    var data = {
+                        email: req.body.email,
+                        password: userPassword,
+                        firstname: req.body.firstname,
+                        lastname: req.body.lastname
+                    };
+
+                    UserDB.user.create(data).then(function(newUser) {
+                        if (!newUser) {
+                            return done(null, false);
+                        }
+                        if (newUser) {
+                            return done(null, newUser);
+                        }
+                    });
+                }
+            });
+        }
+    ));
+
+    // SIGN-IN for existing users
+    passport.use("signin", new LocalStrategy({
+            usernameField: "email",
+            passwordField: "password",
+            passReqToCallback: true
+        },
+        function(req, email, password, done) {
+
+            UserDB.user.findOne({
+                where: {
+                    email: email
+                }
+            }).then(function(user, err) {
 
                 if (!user) {
                     return done(null, false, {
@@ -73,7 +66,6 @@ module.exports = function (passport, user) {
                     });
                 }
                 var validPassword = bCrypt.compareSync(password, user.password);
-                console.log(validPassword);
 
                 if (!validPassword) {
                     return done(null, false, {
@@ -81,13 +73,11 @@ module.exports = function (passport, user) {
                     });
                 }
 
-                console.log("DOJO: " + user.password, "typed in:" + password);
-
                 var userInfo = user.get();
                 console.log(userInfo);
                 return done(null, userInfo);
 
-            }).catch(function (err) {
+            }).catch(function(err) {
                 return done(null, false, {
                     message: "Sorry! Something weng wrong with your sign in."
                 });
@@ -95,17 +85,14 @@ module.exports = function (passport, user) {
             });
 
         }
-    )
-    );
+    ));
 
-
-
-    passport.serializeUser(function (user, done) {
+    passport.serializeUser(function(user, done) {
         done(null, user.id);
     });
 
-    passport.deserializeUser(function (id, done) {
-        UserDB.user.findByPk(id).then(function (user) {
+    passport.deserializeUser(function(id, done) {
+        UserDB.user.findByPk(id).then(function(user) {
             if (user) {
                 done(null, user.get());
             } else {

@@ -7,9 +7,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"
-        integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6"
-        crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
 
     <script src="https://kit.fontawesome.com/9cf5b93a1e.js" crossorigin="anonymous"></script>
     <!--===============================================================================================-->
@@ -35,79 +33,155 @@
                     <span class="login100-form-title p-b-34 p-t-27">
                         Sign Up
                     </span>
-                    <!-- <form id="signup" name="signup" method="post" action="/auth/signup"> -->
 
-                        <div class="wrap-input100 validate-input" data-validate="Enter name">
-                            <input class="input100 text requiredFirst" type="text" name="firstname"
-                                placeholder="First name">
+                    <div class="wrap-input100 validate-input" data-validate="Enter name">
+                        <input class="input100 text requiredFirst" type="text" name="firstname" placeholder="First name">
+                        <span class="focus-input100">
+                            <i class="fas fa-user" style="color:antiquewhite"></i>
+                        </span>
+                    </div>
+                    <div class="wrap-input100 validate-input" data-validate="Enter name">
+                        <input class="input100 text requiredLast" type="text" name="lastname" placeholder="Last name">
+                        <span class="focus-input100">
+                            <i class="fas fa-user" style="color:antiquewhite"></i>
+                        </span>
+                    </div>
+                    <div class="wrap-input100 validate-input" data-validate="Enter email">
+                        <input class="input100 text" type="email" name="email" placeholder="Email">
+                        <span class="focus-input100">
+                            <i class="fas fa-user" style="color:antiquewhite"></i>
+                        </span>
+                    </div>
+
+                    <div class="wrap-input100 validate-input" data-validate="Enter password">
+                        <input class="input100" type="password" name="password" placeholder="Password">
+                        <span class="focus-input100">
+                            <i class="fas fa-lock" style="color:antiquewhite"></i>
+                        </span>
+                    </div>
+
+                    <div class="wrap-input100 validate-input" data-validate="Select Title">
+                        <div class="input100" type="Title" name="Title" placeholder="Title">
                             <span class="focus-input100">
-                                <i class="fas fa-user" style="color:antiquewhite"></i>
+                                <i class="fas fa-user-friends"></i>
                             </span>
-                        </div>
-                        <div class="wrap-input100 validate-input" data-validate="Enter name">
-                            <input class="input100 text requiredLast" type="text" name="lastname"
-                                placeholder="Last name">
-                            <span class="focus-input100">
-                                <i class="fas fa-user" style="color:antiquewhite"></i>
-                            </span>
-                        </div>
-                        <div class="wrap-input100 validate-input" data-validate="Enter email">
-                            <input class="input100 text" type="email" name="email" placeholder="Email">
-                            <span class="focus-input100">
-                                <i class="fas fa-user" style="color:antiquewhite"></i>
-                            </span>
-                        </div>
+                            <select id="title" name="title">
+                                <option value="Manager">Manager</option>
+                                <option value="Employee">Employee</option>
+                            </select>
 
-                        <div class="wrap-input100 validate-input" data-validate="Enter password">
-                            <input class="input100" type="password" name="password" placeholder="Password">
-                            <span class="focus-input100">
-                                <i class="fas fa-lock" style="color:antiquewhite"></i>
-                            </span>
                         </div>
+                    </div>
 
-                        <div class="wrap-input100 validate-input" data-validate="Select Title">
-                            <div class="input100" type="Title" name="Title" placeholder="Title">
-                                <span class="focus-input100">
-                                    <i class="fas fa-user-friends"></i>
-                                </span>
-                                <select id="title" name="title">
-                                    <option value="Manager">Manager</option>
-                                    <option value="Employee">Employee</option>
-                                </select>
+                    <div class="container-login100-form-btn">
+                        <button class="login100-form-btn" id="signupbtn">
+                            Signup
+                        </button>
+                    </div>
 
-                            </div>
+
+                    <div class="container-login100-form-btn">
+                        <div class="login100-form-btn">
+                            <a href="index.html">
+                                Go Back
+                            </a>
                         </div>
-
-                        <div class="container-login100-form-btn">
-                            <button class="login100-form-btn" id="signupbtn">
-                                Signup
-                            </button>
-                        </div>
-                        </a>
+                    </div>
             </div>
             </form>
         </div>
     </div>
     </div>
+    <script>
+        $(document).ready(function() {
 
+            function validateForm() {
+                var first = document.forms["signin"]["firstname"].value;
+                var last = document.forms["signin"]["lastname"].value;
+                if (first == "") {
+                    $(".requiredFirst").after("Please fill out required name field.");
+                    return false;
+                } else if (last == "") {
+                    $(".requiredLast").after("Please fill out required name field.");
+                    return false;
+                }
+                return true;
+            };
 
+            (function($) {
+                "use strict";
+
+                /*[ Focus input ]*/
+                $('.input100').each(function() {
+                        $(this).on('blur', function() {
+                            if ($(this).val().trim() != "") {
+                                $(this).addClass('has-val');
+                            } else {
+                                $(this).removeClass('has-val');
+                            }
+                        })
+                    })
+                    /*[ Validate ]*/
+                var input = $('.validate-input .input100');
+
+                $('.validate-form').on('submit', function() {
+                    var check = true;
+
+                    for (var i = 0; i < input.length; i++) {
+                        if (validate(input[i]) == false) {
+                            showValidate(input[i]);
+                            check = false;
+                        }
+                    }
+                    return check;
+                });
+
+                $('.validate-form .input100').each(function() {
+                    $(this).focus(function() {
+                        hideValidate(this);
+                    });
+                });
+
+                function validate(input) {
+                    if ($(input).attr('type') == 'email' || $(input).attr('name') == 'email') {
+                        if ($(input).val().trim().match(/^([a-zA-Z0-9_\-\.]+)@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.)|(([a-zA-Z0-9\-]+\.)+))([a-zA-Z]{1,5}|[0-9]{1,3})(\]?)$/) == null) {
+                            return false;
+                        }
+                    } else {
+                        if ($(input).val().trim() == '') {
+                            return false;
+                        }
+                    }
+                }
+
+                function showValidate(input) {
+                    var thisAlert = $(input).parent();
+
+                    $(thisAlert).addClass('alert-validate');
+                }
+
+                function hideValidate(input) {
+                    var thisAlert = $(input).parent();
+
+                    $(thisAlert).removeClass('alert-validate');
+                }
+            });
+        });
+
+        /*[ Show pass ]*/
+        var showPass = 0;
+        $('.btn-show-pass').on('click', function() {
+            if (showPass == 0) {
+                $(this).next('input').attr('type', 'text');
+                $(this).addClass('active');
+                showPass = 1;
+            } else {
+                $(this).next('input').attr('type', 'password');
+                $(this).removeClass('active');
+                showPass = 0;
+            }
+        });
+    </script>
 </body>
-
-<!-- <script type="text/javascript">
-
-    $(document).ready(function () {
-        function validateForm() {
-            var first = document.forms["signup"]["firstname"].value;
-            var last = document.forms["signup"]["lastname"].value;
-            if (first == "") {
-                $(".requiredFirst").after("Please fill out required name field.");
-                return false;
-            } else if (last == "") {
-                $(".requiredLast").after("Please fill out required name field.");
-                return false;
-            } return true;
-        };
-    });
-</script> -->
 
 </html>
