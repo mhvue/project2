@@ -4,7 +4,7 @@ module.exports = function(sequelize, DataTypes) {
             autoIncrement: true,
             primaryKey: true,
             type: DataTypes.INTEGER
-          },
+        },
         firstName: {
             type: DataTypes.STRING,
             allowNull: false,
@@ -29,4 +29,4 @@ module.exports = function(sequelize, DataTypes) {
         }
     });
     return Schedule;
-  };
+};
