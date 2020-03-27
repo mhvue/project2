@@ -24,29 +24,35 @@ Just click Sign Up and you can create an account.
 
 Mobile friendly and you will *always be on time!*
 
-## How is the Sign In and Sign Up secure?  
-In this application, we are using Passport to check users's email and password from the database. This type of authentication is called Local Strategy from Passport. Authentication is done with the use of passport.authenticate() via its function of passport.use().
+## How we authenticate the Sign In and Sign Up 
+In this application, we are using Passport.
 
-Passport.use() must be configured first by setting _stratagies_ that will tell passport how to validate user's information when a user is signing back in or a user is signing up. 
+We have set Local Strategy with Passport to check for email and password from the database. Authentication is done with passport.authenticate() via its function of passport.use().
 
-When new users are signing up, Passport will check the database (in this application we use Sequalize ORM methods) and if not already in database, with bCrypt, create passwords are then hashed for security purposes. 
+Passport.use() is configured by setting strategies on how to validate user's information when a user is signing back in or when a user is signing up. 
 
-If authentication with Passport is successful, users gain access to pages that only a registered user can see (such as requesting time off). 
+Our strategy for when users are signing up is to have Passport check the database via Sequalize ORM methods. If not already in database, add user to database and along with bCrypt, create a hashed passwords. When users are signing in, we have Passport with Sequalize ORM methods, verify email and password from database.
+
+If authentication with Passport is successful, users gain access to rest of html pages (such as requesting time off). 
+
+Learn about Passport and bCrypt here:
+* <a href="https://www.npmjs.com/package/bcrypt">bCrypt</a>
+* <a href="http://www.passportjs.org/" >Passport</a>
+* <a href="https://github.com/jaredhanson/passport">Passport Github</a>
 
 
-Check it out here:<br>
- https://mighty-wildwood-15788.herokuapp.com  
+<a href= "https://mighty-wildwood-15788.herokuapp.com">Check out our ABOT application</a>
 
 
-## How to get started: 
+## How you can get started: 
 1. Clone the repo on your local machine 
-<pre><code>git clone -https://github.com/mhvue/project2.git </code></pre>
+<pre><code>git clone https://github.com/mhvue/project2.git </code></pre>
 2. Open in your code editor  the cloned repo (I am using Visual Studio Code (VSC) )
 3. Run "npm install" in the terminal of VSC to get all the required packages from package-lock.json 
 <pre><code>npm install</code></pre>
 
 #### Setting up your database
-4. We are using Sequalize, therefore, make the following model in MySql workbench: 
+4. Since we are using Sequalize, make the following model in MySql workbench: 
 <pre><code>DROP DATABASE IF EXISTS abot_db;
 CREATE DATABASE abot_db; </code></pre>
 5. Update your MySQL credentials in config.json.
@@ -54,7 +60,7 @@ CREATE DATABASE abot_db; </code></pre>
 #### Running the server
 6. Run server.js in your terminal of VSC 
 <pre><code>node server.js</code></pre>
-7. Open the app via localhost (this application have it set as http://localhost:8080)
+7. Open the app via localhost (we have ours set as http://localhost:8080)
 8. You are free to explore, add, and make it your own! 
 
 
@@ -69,9 +75,9 @@ CREATE DATABASE abot_db; </code></pre>
 ### Back End 
 * Node.js
 * Express
-* Express-session -middleware to handle session generation
-* Passport.js http://www.passportjs.org/ 
-* bCrypt https://www.npmjs.com/package/bcrypt 
+* Express-session 
+* Passport.js 
+* bCrypt 
 * MySQL
 * Sequalize
 

@@ -15,7 +15,7 @@ module.exports = function (app){
         }
     );
  
-    //onced logged in, this is what user be taken to next
+
     app.get("/auth/loggedin", isLoggedIn, authController.index);
  
     app.get("/auth/logout", authController.logout);
