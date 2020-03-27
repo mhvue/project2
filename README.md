@@ -31,7 +31,7 @@ We have set Local Strategy with Passport to check for email and password from th
 
 Passport.use() is configured by setting strategies on how to validate user's information when a user is signing back in or when a user is signing up. 
 
-Our strategy for when users are signing up is to have Passport check the database via Sequalize ORM methods. If not already in database, add user to database and along with bCrypt, create a hashed passwords. When users are signing in, we have Passport with Sequalize ORM methods, verify email and password from database.
+Our strategy for when users are signing up, is to have Passport check the database with Sequalize ORM methods. If the user is not in database it will add the user. Also, along with bCrypt it will create a hashed password. When users are signing in, we have Passport with Sequalize ORM methods. It will verify the user's email and password from the database. 
 
 If authentication with Passport is successful, users gain access to rest of html pages (such as requesting time off). 
 
