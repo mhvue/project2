@@ -1,9 +1,12 @@
 var db = require("../models");
+var sequelize = require("sequelize");
 
 module.exports = function (app) {
     // Get all examples
     app.get("/api/schedule", function (req, res) { //this is to display the full work schedule currently
-        db.schedule.findAll({}).then(function (dbschedule) {
+        db.schedule.findAll({
+            order: [sequelize.col('date')]
+        }).then(function (dbschedule) {
             res.json(dbschedule);
         });
     
@@ -30,7 +33,7 @@ module.exports = function (app) {
         db.schedule.create({
             firstName: req.body.firstName,
             lastName: req.body.lastName,
-            date: req.body.date,
+            date: Date.parse(req.body.date),
             startTime: req.body.startTime,
             endTime: req.body.endTime
         }).then(function (dbschedule) {
