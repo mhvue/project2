@@ -29,7 +29,7 @@ app.set("views", "./views");
 require("./routes/apiRoutes")(app);
 require("./routes/authRoutes")(app);
 require("./config/passport/passport-logic")(passport, db.user);
-require("./routes/htmlRoutes")(app);
+require("./routes/htmlRoutes")(app); 
 
 
 

@@ -1,10 +1,8 @@
 var path = require("path");
 
 module.exports = function(app) {
-  // 1st page to Load index login 
+  // 1st page to Load index 
   app.get("/", function(req, res) { 
-    //will have Login as the default 
-    // res.redirect("/signin");
     res.sendFile(path.join(__dirname, "../public/index.html"));
   });
 
@@ -12,12 +10,12 @@ module.exports = function(app) {
     res.sendFile(path.join(__dirname, "../public/signup.html"));
    });
 
-   app.get("/signin", function(req, res) { //was index here
+   app.get("/signin", function(req, res) { 
     res.sendFile(path.join(__dirname, "../public/login.html"));
 
    });
 
-  //onced LOGGED IN, see schedule page AGE W/ HOME OR INDEX 
+  //onced LOGGED IN, see schedule page W/ HOME OR INDEX 
   app.get("/loggedin", function(req, res) { //was index here
    res.sendFile(path.join(__dirname, "../public/schedulePage.html"));
   
@@ -32,6 +30,7 @@ module.exports = function(app) {
   //availability
   app.get("/avail", isLoggedIn, function(req,res){ 
     res.sendFile(path.join(__dirname, "../public/avail.html")); 
+
   });
 
 
@@ -40,7 +39,7 @@ module.exports = function(app) {
     res.sendFile(path.join(__dirname, "../public/requestOff.html")); 
   });
 
-   //user LOGS OUT Page = this is the page that shows when user logs out
+   //user LOGS OUT Page = this is the page that shows when user logs out 
   app.get("/logout", function(req,res) {
 
     res.redirect("/");
