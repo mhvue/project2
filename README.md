@@ -24,7 +24,7 @@ Just click Sign Up and you can create an account.
 
 Mobile friendly and you will *always be on time!*
 
-Check it out here: 
+Check it out here: *link to go here* 
 
 ## Technologies used
 
