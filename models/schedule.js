@@ -16,7 +16,7 @@ module.exports = function(sequelize, DataTypes) {
             msg: 'Please enter your last name'
         },
         date: {
-            type: DataTypes.STRING,
+            type: DataTypes.DATEONLY,
             allowNull: false
         },
         startTime: {
