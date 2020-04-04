@@ -4,6 +4,8 @@ User friendly scheduler at your convenience. Stay up to date with your work sche
 <p align="center"><a href="https://mighty-wildwood-15788.herokuapp.com">
 <br><img src= "public/images/ABOT.indexImg.png"></p>
 
+Check our project: https://mighty-wildwood-15788.herokuapp.com
+
 ## How it works:
 
 Simply login and you have access to:
@@ -25,7 +27,7 @@ Just click Sign Up and you can create an account.
 Mobile friendly and you will *always be on time!*
 
 ## How we authenticate the Sign In and Sign Up 
-In this application, we are using Passport.
+In this application, we are using Passport. We use this <a href= "https://code.tutsplus.com/tutorials/using-passport-with-sequelize-and-mysql--cms-27537">tutorial</a> as a guide. *NOTE: it is a little outdated in regards Sequalize methods.* 
 
 We have set Local Strategy with Passport to check for email and password from the database. Authentication is done with passport.authenticate() via its function of passport.use().
 
@@ -40,8 +42,6 @@ Learn about Passport and bCrypt here:
 * <a href="http://www.passportjs.org/" >Passport</a>
 * <a href="https://github.com/jaredhanson/passport">Passport Github</a>
 
-
-<a href= "https://mighty-wildwood-15788.herokuapp.com">Check out our ABOT application</a>
 
 
 ## How you can get started: 
@@ -81,6 +81,7 @@ CREATE DATABASE abot_db; </code></pre>
 * MySQL
 * Sequalize
 
+## Motivation 
 Learn more about our motivation and possible future developments: https://docs.google.com/presentation/d/1V575YpgOxrLqJHyG1Bb-LuMvrE7aMmrmb8zwXNq5Tto/edit?usp=sharing
 
 ## Contributors:

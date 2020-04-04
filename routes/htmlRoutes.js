@@ -16,7 +16,7 @@ module.exports = function(app) {
    });
 
   //onced LOGGED IN, see schedule page W/ HOME OR INDEX 
-  app.get("/loggedin", function(req, res) { //was index here
+  app.get("/loggedin", isLoggedIn, function(req, res) { //was index here
    res.sendFile(path.join(__dirname, "../public/schedulePage.html"));
   
   });
