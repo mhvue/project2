@@ -4,7 +4,7 @@ User friendly scheduler at your convenience. Stay up to date with your work sche
 <p align="center"><a href="https://mighty-wildwood-15788.herokuapp.com">
 <br><img src= "public/images/ABOT.indexImg.png"></p>
 
-Check our project: https://mighty-wildwood-15788.herokuapp.com
+Check out the project: https://mighty-wildwood-15788.herokuapp.com
 
 ## How it works:
 
